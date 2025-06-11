@@ -19,7 +19,7 @@ int main(int argc, char **argv)
     init_data(&data);
     //if(parse_args(&data, argv[1]))
     //    return(1);
-    mlx_hook(data.win, 2, 1L << 0, key_press, &data);
+    mlx_hook(data.win, 2, 1L << 0, key_press, &data.player);
     mlx_hook(data.win, 3, 1L << 1, key_release, &data.player);
     mlx_hook(data.win, 17, 0, handle_exit, &data);
 

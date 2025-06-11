@@ -8,7 +8,6 @@ void    init_data(t_data *data)
     data->info = mlx_get_data_addr(data->img_prt, &data->bpp, &data->line_len, &data->endian);
     data->player.data = data;
     init_player(&data->player);
-    mlx_put_image_to_window(data->mlx, data->win, data->img_prt, 0, 0);
 }
 
 void    init_player(t_player *player)
