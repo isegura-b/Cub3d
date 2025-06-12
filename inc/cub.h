@@ -6,10 +6,11 @@
 #include <math.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include <math.h>
 #include "./mlx/mlx.h"
 
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 1280
+# define HEIGHT 720
 
 //definimos numero, asi al usar la tecla la asociamos comparando estos numeros
 # define W 119
@@ -18,6 +19,11 @@
 # define D 100
 # define ESC 65307
 
+# define LEFT 65361
+# define RIGHT 65363
+# define PI 3.14159265359
+
+# define WALL 64
 
 typedef struct s_player //lo ponen en el mapa, asi que cuando hagas el gnl hay que cambiarlo
 {
@@ -30,6 +36,10 @@ typedef struct s_player //lo ponen en el mapa, asi que cuando hagas el gnl hay q
     int     key_right;
 
     struct s_data *data;
+
+    float   angle;
+    int     left_r;
+    int     right_r;
 
 }   t_player ;
 
@@ -44,6 +54,7 @@ typedef struct s_data
     int     line_len;
     int     endian;
 
+    char    **map;
     t_player player;
 
 }   t_data ;
