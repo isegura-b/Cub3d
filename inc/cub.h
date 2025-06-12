@@ -23,7 +23,7 @@
 # define RIGHT 65363
 # define PI 3.14159265359
 
-# define WALL 64
+# define WALL 64 //pixels
 
 typedef struct s_player //lo ponen en el mapa, asi que cuando hagas el gnl hay que cambiarlo
 {

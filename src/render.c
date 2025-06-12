@@ -8,16 +8,12 @@ void draw_square_test(int x, int y, int size, int color, t_data *data)
     {
         if (x + i >= 0 && x + i < WIDTH && y >= 0 && y < HEIGHT)
             my_pixel_put(x + i, y, color, data); 
-
         if (x >= 0 && x < WIDTH && y + i >= 0 && y + i < HEIGHT)
             my_pixel_put(x, y + i, color, data);
-
         if (x + size - 1 >= 0 && x + size - 1 < WIDTH && y + i >= 0 && y + i < HEIGHT)
             my_pixel_put(x + size - 1, y + i, color, data);
-
         if (x + i >= 0 && x + i < WIDTH && y + size - 1 >= 0 && y + size - 1 < HEIGHT)
             my_pixel_put(x + i, y + size - 1, color, data);
-
         i++;
     }
 }
@@ -98,19 +94,20 @@ int     draw_loop(t_data *data)
     t_player    *player;
     int         i;
     float       start_x;
+    float       pov;
 
     player = &data->player;
     move_player(player);
     clean_img(data);
-    draw_square_test(player->x, player->y, 10, 0x00FF00, data);
+    draw_square_test(player->x - 10 / 2, player->y - 10 / 2, 10, 0x00FF00, data);
     draw_map(data);
     i = 0;
     start_x = player->angle - PI / 6;
-    float fraction = PI / 3 / WIDTH;
+    pov = (PI / 6) / WIDTH; // 30º / pantalla
     while(i < WIDTH)
     {
         draw_ray(player, data, start_x, i);
-        start_x += fraction;
+        start_x += pov;
         i++;
     }
 

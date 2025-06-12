@@ -45,6 +45,19 @@ int key_release(int keycode, t_player *player)
     return (0);
 }
 
+int wall_stop(t_player *player)
+{
+    float next_x = player->x + cos(player->angle);
+    float next_y = player->y + sin(player->angle);
+
+    int map_x = (int)(next_x / WALL);
+    int map_y = (int)(next_y / WALL);
+
+    if (player->data->map[map_y][map_x] == '1')
+        return 1; // Hay una pared, detén el movimiento
+    return 0; // No hay pared, puedes avanzar
+}
+
 void move_player(t_player *player)
 {
     int     speed; 
@@ -67,22 +80,22 @@ void move_player(t_player *player)
     if (player->angle < 0)
         player->angle = 2 * PI;
     //angulo hacia donde avanza (papel)
-    if (player->key_up)
+    if (player->key_up && !wall_stop(player))
     {
         player->x += cos_angle * speed;
         player->y += sin_angle * speed;
     }
-    else if (player->key_down)
+    else if (player->key_down && !wall_stop(player))
     {
         player->x -= cos_angle * speed;
         player->y -= sin_angle * speed;
     }
-    else if (player->key_left)
+    else if (player->key_left && !wall_stop(player))
     {
         player->x += sin_angle * speed;
         player->y -= cos_angle * speed;
     }
-    else if (player->key_right)
+    else if (player->key_right && !wall_stop(player))
     {
         player->x -= sin_angle * speed;
         player->y += cos_angle * speed;
