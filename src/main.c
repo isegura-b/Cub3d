@@ -1,15 +1,6 @@
 #include "../inc/cub.h"   
 
 
-int	handle_exit(void *param)
-{
-	t_data *data = (t_data *)param;
-
-	mlx_destroy_window(data->mlx, data->win);
-	exit(0);
-	return (0);
-}
-
 int main(int argc, char **argv)
 {
     t_data data;  //missing

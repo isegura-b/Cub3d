@@ -68,6 +68,7 @@ int     parse_args(t_data *data, char *filename);
 //utils
 void    ft_error(char *error_str);
 void    my_pixel_put(int x, int y, int color, t_data *img);
+int	handle_exit(void *param);
 
 //events
 int     key_press(int keycode, t_player *player);
