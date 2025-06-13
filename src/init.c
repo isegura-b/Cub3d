@@ -5,12 +5,12 @@ char **get_map(void) //test sin gnl
     char **map = malloc(sizeof(char *) * 11);
     map[0] = "111111111111111";
     map[1] = "100000000000001";
-    map[2] = "100000011000001";
+    map[2] = "100000000000001";
     map[3] = "100000000000001";
     map[4] = "100000000000001";
-    map[5] = "100001000000001";
+    map[5] = "111111010111111";
     map[6] = "100000000000001";
-    map[7] = "100000000100001";
+    map[7] = "100000000000001";
     map[8] = "100000000000001";
     map[9] = "111111111111111";
     map[10] = NULL;
@@ -30,10 +30,10 @@ void    init_data(t_data *data)
 
 void    init_player(t_player *player)
 {
-    //por programar
-    player->x = WIDTH / 2; //posicion de spawn
-    player->y = HEIGHT / 2;
-    player->angle = PI * 1.5; //direccion de spawn
+    // Posición inicial en el centro del mapa
+    player->x = WALL * 2; // 2 bloques desde el borde izquierdo
+    player->y = WALL * 2; // 2 bloques desde el borde superior
+    player->angle = PI; // Mirando hacia arriba (0 grados)
 
     player->key_up = 0;
     player->key_down = 0;

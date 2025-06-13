@@ -39,8 +39,11 @@ float ft_dis(float x1, float y1, float x2, float y2, t_data *data)
 {
     float delta_x = x2 - x1;
     float delta_y = y2 - y1;
+    float dist = distance(delta_x, delta_y);
     float angle = atan2(delta_y, delta_x) - data->player.angle;
-    float fix_dist = distance(delta_x, delta_y) * cos(angle);
+    float fix_dist = dist * cos(angle);
+    if (fix_dist < 0.1) // Evitar división por cero y distorsión extrema
+        fix_dist = 0.1;
     return (fix_dist);
 }
 
@@ -64,7 +67,7 @@ void draw_wall(t_player *player, t_data *data, float start_x, int i)
 
     // Corrige distancia y calcula la altura en pantalla
     dis = ft_dis(player->x, player->y, ray_x, ray_y, data);
-    height = (WALL / dis) * WIDTH * 1.5;
+    height = (WALL / dis) * WIDTH;
     start_y = (HEIGHT - height) / 2;
     end = start_y + height;
 
@@ -74,14 +77,13 @@ void draw_wall(t_player *player, t_data *data, float start_x, int i)
     y = start_y;
     while (y < end)
     {
-        // Usa las coordenadas del mundo para que la textura no se mueva
-        int tex_x = ((int)ray_x) % 20;  // columnas de la textura
+        int tex_x = ((int)ray_x) % 20;
         int tex_y = ((int)(ray_y + ((float)(y - start_y) / height) * WALL)) % 20; // filas de la textura
 
         if (tex_y < 2 || tex_x < 2)
-            my_pixel_put(i, y, 0x555555, data); // líneas oscuras (rejilla)
+            my_pixel_put(i, y, 0x555555, data);
         else
-            my_pixel_put(i, y, 0xA0A0A0, data); // relleno metálico
+            my_pixel_put(i, y, 0xA0A0A0, data);
 
         y++;
     }
@@ -99,7 +101,7 @@ int     draw_loop(t_data *data)
     clean_img(data);
     i = 0;
     start_x = player->angle - PI / 6;
-    pov = (PI / 6) / WIDTH; // 30º / pantalla
+    pov = (PI / 3) / WIDTH;
     while(i < WIDTH)
     {
         draw_wall(player, data, start_x, i);
