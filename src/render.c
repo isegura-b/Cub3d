@@ -50,41 +50,42 @@ float ft_dis(float x1, float y1, float x2, float y2, t_data *data)
 
 void draw_wall(t_player *player, t_data *data, float start_x, int i)
 {
-    float ray_x;
-    float ray_y;
-    float dis;
-    float height;
-    int start_y;
-    int end;
-    int y;
+    float ray_x = player->x;
+    float ray_y = player->y;
+    float dis, height;
+    int start_y, end, y;
 
-    ray_x = player->x;
-    ray_y = player->y;
-
+    // Lanza el rayo hasta chocar con una pared
     while (!hit_ray(ray_x, ray_y, data))
     {
         ray_x += cos(start_x);
         ray_y += sin(start_x);
     }
+
+    // Corrige distancia y calcula la altura en pantalla
     dis = ft_dis(player->x, player->y, ray_x, ray_y, data);
     height = (WALL / dis) * WIDTH * 1.5;
     start_y = (HEIGHT - height) / 2;
     end = start_y + height;
 
+    if (start_y < 0) start_y = 0;
+    if (end > HEIGHT) end = HEIGHT;
+
     y = start_y;
     while (y < end)
     {
-        if (y < start_y + 10)
-            my_pixel_put(i, y, 0x0000FF, data); // borde superior
-        else if (y >= end - 10)
-            my_pixel_put(i, y, 0x0000FF, data); // borde inferior
+        // Usa las coordenadas del mundo para que la textura no se mueva
+        int tex_x = ((int)ray_x) % 20;  // columnas de la textura
+        int tex_y = ((int)(ray_y + ((float)(y - start_y) / height) * WALL)) % 20; // filas de la textura
+
+        if (tex_y < 2 || tex_x < 2)
+            my_pixel_put(i, y, 0x555555, data); // líneas oscuras (rejilla)
         else
-            my_pixel_put(i, y, 0xA0A0A0 , data); // gris relleno
+            my_pixel_put(i, y, 0xA0A0A0, data); // relleno metálico
 
         y++;
     }
 }
-
 
 int     draw_loop(t_data *data)
 {
