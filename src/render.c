@@ -1,23 +1,5 @@
 #include "../inc/cub.h"
 
-void draw_square_test(int x, int y, int size, int color, t_data *data)
-{
-    int i = 0;
-
-    while (i < size)
-    {
-        if (x + i >= 0 && x + i < WIDTH && y >= 0 && y < HEIGHT)
-            my_pixel_put(x + i, y, color, data); 
-        if (x >= 0 && x < WIDTH && y + i >= 0 && y + i < HEIGHT)
-            my_pixel_put(x, y + i, color, data);
-        if (x + size - 1 >= 0 && x + size - 1 < WIDTH && y + i >= 0 && y + i < HEIGHT)
-            my_pixel_put(x + size - 1, y + i, color, data);
-        if (x + i >= 0 && x + i < WIDTH && y + size - 1 >= 0 && y + size - 1 < HEIGHT)
-            my_pixel_put(x + i, y + size - 1, color, data);
-        i++;
-    }
-}
-
 void    clean_img(t_data *data)
 {
     int y;
@@ -36,27 +18,6 @@ void    clean_img(t_data *data)
     }
 }
 
-void    draw_map(t_data *data)
-{
-    char    **map;
-    int     y;
-    int     x;
-
-    map = data->map;
-    y = 0;
-    while (map[y])
-    {
-        x = 0;
-        while (map[y][x])
-        {
-            if (map[y][x] == '1')
-                draw_square_test(x * WALL, y * WALL, WALL, 0xFFFFFF, data);
-            x++;
-        }
-        y++;
-    }
-}
-
 int    hit_ray(float px, float py, t_data *data)
 {
     int     x;
@@ -69,25 +30,61 @@ int    hit_ray(float px, float py, t_data *data)
     return (0);
 }
 
-void    draw_ray(t_player *player, t_data *data, float start_x, int i)
+float distance(float x, float y)
 {
-    float       ray_x;
-    float       ray_y;
-    float       cos_ang;
-    float       sin_ang;
+    return(sqrt(x * x + y * y));
+}
+
+float ft_dis(float x1, float y1, float x2, float y2, t_data *data)
+{
+    float delta_x = x2 - x1;
+    float delta_y = y2 - y1;
+    float angle = atan2(delta_y, delta_x) - data->player.angle;
+    float fix_dist = distance(delta_x, delta_y) * cos(angle);
+    return (fix_dist);
+}
+
+    //  dis = √[(x2-x1)² + (y2 - y1)²]
+    //  height = tamaño pared * ocupacion en pantalla
+    // 1º = tamaño de pared / dis
+
+void draw_wall(t_player *player, t_data *data, float start_x, int i)
+{
+    float ray_x;
+    float ray_y;
+    float dis;
+    float height;
+    int start_y;
+    int end;
+    int y;
 
     ray_x = player->x;
     ray_y = player->y;
-    cos_ang = cos(player->angle);
-    sin_ang = sin(player->angle);
 
-    while (!hit_ray(ray_x, ray_y, data)) //para ver si pega antes por x o por y
+    while (!hit_ray(ray_x, ray_y, data))
     {
-        my_pixel_put(ray_x, ray_y, 0xFF0000, data);
         ray_x += cos(start_x);
         ray_y += sin(start_x);
     }
+    dis = ft_dis(player->x, player->y, ray_x, ray_y, data);
+    height = (WALL / dis) * WIDTH * 1.5;
+    start_y = (HEIGHT - height) / 2;
+    end = start_y + height;
+
+    y = start_y;
+    while (y < end)
+    {
+        if (y < start_y + 10)
+            my_pixel_put(i, y, 0x0000FF, data); // borde superior
+        else if (y >= end - 10)
+            my_pixel_put(i, y, 0x0000FF, data); // borde inferior
+        else
+            my_pixel_put(i, y, 0xA0A0A0 , data); // gris relleno
+
+        y++;
+    }
 }
+
 
 int     draw_loop(t_data *data)
 {
@@ -99,17 +96,14 @@ int     draw_loop(t_data *data)
     player = &data->player;
     move_player(player);
     clean_img(data);
-    draw_square_test(player->x - 10 / 2, player->y - 10 / 2, 10, 0x00FF00, data);
-    draw_map(data);
     i = 0;
     start_x = player->angle - PI / 6;
     pov = (PI / 6) / WIDTH; // 30º / pantalla
     while(i < WIDTH)
     {
-        draw_ray(player, data, start_x, i);
+        draw_wall(player, data, start_x, i);
         start_x += pov;
         i++;
     }
-
     mlx_put_image_to_window(data->mlx, data->win, data->img_prt, 0, 0);
 }

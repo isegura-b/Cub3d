@@ -15,3 +15,12 @@ void	my_pixel_put(int x, int y, int color, t_data *img)
 	offset = (y * img->line_len) + (x * (img->bpp / 8));
 	*(unsigned int *)(img->info + offset) = color;
 }
+
+int	handle_exit(void *param)
+{
+	t_data *data = (t_data *)param;
+
+	mlx_destroy_window(data->mlx, data->win);
+	exit(0);
+	return (0);
+}

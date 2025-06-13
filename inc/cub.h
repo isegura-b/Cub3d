@@ -25,7 +25,7 @@
 
 # define WALL 64 //pixels
 
-typedef struct s_player //lo ponen en el mapa, asi que cuando hagas el gnl hay que cambiarlo
+typedef struct s_player
 {
     float   x;
     float   y;
@@ -80,7 +80,6 @@ void    init_data(t_data *data);
 void    init_player(t_player *player);
 
 //render
-void    draw_square_test(int x, int y, int size, int color, t_data *data);
 int     draw_loop(t_data *data);
 void    clean_img(t_data *data);
 

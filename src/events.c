@@ -47,15 +47,39 @@ int key_release(int keycode, t_player *player)
 
 int wall_stop(t_player *player)
 {
-    float next_x = player->x + cos(player->angle);
-    float next_y = player->y + sin(player->angle);
+    float next_x;
+    float next_y;
+    int map_x;
+    int map_y;
 
-    int map_x = (int)(next_x / WALL);
-    int map_y = (int)(next_y / WALL);
-
+    // Calculamos la siguiente posición basada en la dirección del movimiento
+    if (player->key_up)
+    {
+        next_x = player->x + cos(player->angle) * 3;
+        next_y = player->y + sin(player->angle) * 3;
+    }
+    else if (player->key_down)
+    {
+        next_x = player->x - cos(player->angle) * 3;
+        next_y = player->y - sin(player->angle) * 3;
+    }
+    else if (player->key_left)
+    {
+        next_x = player->x + sin(player->angle) * 3;
+        next_y = player->y - cos(player->angle) * 3;
+    }
+    else if (player->key_right)
+    {
+        next_x = player->x - sin(player->angle) * 3;
+        next_y = player->y + cos(player->angle) * 3;
+    }
+    else
+        return 0;
+    map_x = (int)(next_x / WALL);
+    map_y = (int)(next_y / WALL);
     if (player->data->map[map_y][map_x] == '1')
-        return 1; // Hay una pared, detén el movimiento
-    return 0; // No hay pared, puedes avanzar
+        return 1;
+    return 0;
 }
 
 void move_player(t_player *player)
@@ -65,8 +89,8 @@ void move_player(t_player *player)
     float   cos_angle;
     float   sin_angle;
 
-    angle_speed = 0.05;
-    speed = 1;
+    angle_speed = 0.02;
+    speed = 3;
     cos_angle = cos(player->angle);
     sin_angle = sin(player->angle);
     //angulo
