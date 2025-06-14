@@ -65,7 +65,7 @@ void draw_wall(t_player *player, t_data *data, float start_x, int i)
         ray_y += sin(start_x);
     }
 
-    // Corrige distancia y calcula la altura en pantalla
+    // Corrige la distancia y calcula la altura de la pared
     dis = ft_dis(player->x, player->y, ray_x, ray_y, data);
     height = (WALL / dis) * WIDTH;
     start_y = (HEIGHT - height) / 2;
@@ -74,16 +74,30 @@ void draw_wall(t_player *player, t_data *data, float start_x, int i)
     if (start_y < 0) start_y = 0;
     if (end > HEIGHT) end = HEIGHT;
 
+    // Coordenada del impacto para la textura
+    float wall_x;
+    if (fabs(cos(start_x)) > fabs(sin(start_x)))
+        wall_x = ray_y;
+    else
+        wall_x = ray_x;
+    wall_x -= floor(wall_x); // Fracción
+
+    float center_line_ratio = 0.05; // 5% del alto de la pared
+    int center_line_thickness = (int)(height * center_line_ratio);
+    if (center_line_thickness < 1) center_line_thickness = 1;
+    int line_thickness = 10; // Grosor de la línea superior/inferior (puedes ajustar si quieres)
     y = start_y;
     while (y < end)
     {
-        int tex_x = ((int)ray_x) % 20;
-        int tex_y = ((int)(ray_y + ((float)(y - start_y) / height) * WALL)) % 20; // filas de la textura
-
-        if (tex_y < 2 || tex_x < 2)
-            my_pixel_put(i, y, 0x555555, data);
+        // Solo líneas horizontales y fondo
+        if (
+            (y - start_y < line_thickness) || // Línea superior
+            (y - start_y > height - line_thickness - 1) || // Línea inferior
+            (abs((y - start_y) - height / 2) < center_line_thickness / 2) // Línea central proporcional
+        )
+            my_pixel_put(i, y, 0xFF0000, data); // Rojo para las líneas horizontales
         else
-            my_pixel_put(i, y, 0xA0A0A0, data);
+            my_pixel_put(i, y, 0xAAAAAA, data); // Gris claro para la pared
 
         y++;
     }
