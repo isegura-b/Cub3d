@@ -93,13 +93,13 @@ void draw_wall(t_player *player, t_data *data, float start_x, int i)
     while (y < end)
     {
     if (hit_side == NORTH)
-        my_pixel_put(i, y, 0xAAAAAA, data);
+        my_pixel_put(i, y, 0x00FF00, data);
     else if (hit_side == SOUTH)
         my_pixel_put(i, y, 0x0000FF, data);
     else if (hit_side == EAST)
-        my_pixel_put(i, y, 0xFF0000, data);
+        my_pixel_put(i, y, 0xFF00FF, data);
     else
-        my_pixel_put(i, y, 0x00FF00, data);
+        my_pixel_put(i, y, 0xFF0000, data);
         y++;
     }
 

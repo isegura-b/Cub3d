@@ -33,7 +33,7 @@ void    init_player(t_player *player)
     // Posición inicial en el centro del mapa
     player->x = WALL * 2; // 2 bloques desde el borde izquierdo
     player->y = WALL * 2; // 2 bloques desde el borde superior
-    player->angle = PI; // Mirando hacia arriba (0 grados)
+    player->angle = PI * 2.3; // Mirando hacia arriba (0 grados)
 
     player->key_up = 0;
     player->key_down = 0;
