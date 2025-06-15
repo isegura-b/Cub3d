@@ -25,6 +25,14 @@
 
 # define WALL 64 //pixels
 
+enum
+{
+    NORTH,
+    SOUTH,
+    EAST,
+    WEST,
+} ;
+
 typedef struct s_player
 {
     float   x;

@@ -1,5 +1,5 @@
 NAME = cub3D
-CC = cc
+CC = cc #-Wall -Wextra -Werror
 OBJ = $(SRC:.c=.o)
 
 LFLAGS = -L./inc/mlx -lmlx -lXext -lX11 -lm -lz -fsanitize=address
