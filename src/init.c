@@ -5,11 +5,11 @@ char **get_map(void) //test sin gnl
     char **map = malloc(sizeof(char *) * 11);
     map[0] = "111111111111111111111111111111";
     map[1] = "100000000000000000000000000001";
-    map[2] = "100000000000000000000010000001";
+    map[2] = "100000000000000000000000000001";
     map[3] = "100000000000000000000000000001";
-    map[4] = "100000000000010001000000000001";
-    map[5] = "100000000001000100010000000001";
-    map[6] = "100000000000000000000000000001";
+    map[4] = "100000000000010000000000000001";
+    map[5] = "100000000000000100000000000001";
+    map[6] = "100000000000010000000000000001";
     map[7] = "100000000000000000000000000001";
     map[8] = "100000000000000000000000000001";
     map[9] = "111111111111111111111111111111";
@@ -33,7 +33,7 @@ void    init_player(t_player *player)
     // Posición inicial en el centro del mapa
     player->x = WALL * 2; // 2 bloques desde el borde izquierdo
     player->y = WALL * 2; // 2 bloques desde el borde superior
-    player->angle = PI * 2.3; // Mirando hacia arriba (0 grados)
+    player->angle = 0; // Mirando hacia arriba (0 grados)
 
     player->key_up = 0;
     player->key_down = 0;

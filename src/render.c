@@ -18,22 +18,6 @@ void    clean_img(t_data *data)
     }
 }
 
-    //  dis = √[(x2-x1)² + (y2 - y1)²]
-    //  height = tamaño pared * ocupacion en pantalla
-    // 1º = tamaño de pared / dis
-
-float ft_dis(float delta_x, float delta_y, t_data *data)
-{
-    float dist;
-    float angle;
-    float fix_dist;
-    dist = sqrt((delta_x * delta_x) + (delta_y * delta_y));
-    angle = atan2(delta_y, delta_x) - data->player.angle;
-    fix_dist = dist * cos(angle);
-    return (fix_dist);
-}
-
-
 int    hit_ray(int x, int y, t_data *data)
 {
     if (data->map[y][x] == '1')
@@ -41,74 +25,38 @@ int    hit_ray(int x, int y, t_data *data)
     return (0);
 }
 
-void draw_wall(t_player *player, t_data *data, float start_x, int i)
+void draw_column(t_hit_info *hit, int i, t_data *data)
 {
-    float ray_x = player->x;
-    float ray_y = player->y;
-    float dis, height;
-    int start_y, end, y;
-    int hit_side;
-    float last_x = ray_x;
-    float last_y = ray_y;
+    int y;
 
-    // Lanza el rayo
-    while (!hit_ray(ray_x / WALL, ray_y / WALL, data))
-    {
-        last_x = ray_x;
-        last_y = ray_y;
-        ray_x += cos(start_x);
-        ray_y += sin(start_x);
-    }
-
-    //que orientacion es segun donde por donde golpea el rallo
-    if ((int)(ray_x / WALL) != (int)(last_x / WALL)) // Entró desde ESTE u OESTE
-    {
-        if ((int)(ray_x / WALL) > (int)(last_x / WALL))
-            hit_side = WEST;
-        else
-            hit_side = EAST;
-    }
-    else // Entró desde NORTE o SUR
-    {
-       if ((int)(ray_y / WALL) > (int)(last_y / WALL))
-           hit_side = NORTH;
-       else
-          hit_side = SOUTH;
-    }
-
-    // Distancia y altura
-    dis = ft_dis(ray_x - player->x, ray_y - player->y, data);
-    height = (WALL / dis) * WIDTH;
-    start_y = (int)((HEIGHT - height) / 2);
-    end = (int)(start_y + height);
-
-    // Cielo
     y = 0;
-    while (y < start_y)
+    while (y < hit->start_y) //sky
+        my_pixel_put(i, y++, 0x87CEEB, data);
+    while (y < hit->end_y)  //wall
     {
-        my_pixel_put(i, y, 0x87CEEB, data);
-        y++;
+        if (hit->hit_side == NORTH)
+            my_pixel_put(i, y++, 0x00FF00, data);
+        else if (hit->hit_side == SOUTH)
+            my_pixel_put(i, y++, 0x0000FF, data);
+        else if (hit->hit_side == EAST)
+            my_pixel_put(i, y++, 0xFF00FF, data);
+        else 
+            my_pixel_put(i, y++, 0xFF0000, data);
     }
-    // Pared
-    while (y < end)
-    {
-    if (hit_side == NORTH)
-        my_pixel_put(i, y, 0x00FF00, data);
-    else if (hit_side == SOUTH)
-        my_pixel_put(i, y, 0x0000FF, data);
-    else if (hit_side == EAST)
-        my_pixel_put(i, y, 0xFF00FF, data);
-    else
-        my_pixel_put(i, y, 0xFF0000, data);
-        y++;
-    }
+    while (y < HEIGHT) //floor
+        my_pixel_put(i, y++, 0x228B22, data);
+}
 
-    // Suelo
-    while (y < HEIGHT)
-    {
-        my_pixel_put(i, y, 0x228B22, data);
-        y++;
-    }
+void draw_wall(t_player *player, t_data *data, float angle, int i)
+{
+    t_hit_info hit;
+
+    cast_ray(player, data, angle, &hit);
+    hit.distance = hit.distance * cos(angle - player->angle);
+    hit.height = (WALL / hit.distance) * WIDTH;
+    hit.start_y = (int)((HEIGHT - hit.height) / 2);
+    hit.end_y = (int)(hit.start_y + hit.height);
+    draw_column(&hit, i, data);
 }
 
 int     draw_loop(t_data *data)
@@ -131,4 +79,5 @@ int     draw_loop(t_data *data)
         i++;
     }
     mlx_put_image_to_window(data->mlx, data->win, data->img_prt, 0, 0);
+    return (0);
 }

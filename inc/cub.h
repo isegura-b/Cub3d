@@ -68,7 +68,35 @@ typedef struct s_data
 }   t_data ;
 
 
+typedef struct s_hit_info {
+    float   ray_x; 
+    float   ray_y;
+    float   last_x; 
+    float   last_y;
+    int     hit_side;
+    float   distance;
+    float   height;
+    int     start_y;
+    int     end_y;
+} t_hit_info;
 
+typedef struct s_ray_vars
+{
+    float pos_x;
+    float pos_y;
+    int map_x;
+    int map_y;
+    float ray_dir_x;
+    float ray_dir_y;
+    float delta_dist_x;
+    float delta_dist_y;
+    float side_dist_x;
+    float side_dist_y;
+    int step_x;
+    int step_y;
+    int hit_wall;
+    int side;
+} t_ray_vars;
 
 //parsing
 int     parse_args(t_data *data, char *filename);
@@ -91,5 +119,9 @@ void    init_player(t_player *player);
 //render
 int     draw_loop(t_data *data);
 void    clean_img(t_data *data);
+int    hit_ray(int x, int y, t_data *data);
+
+//dda
+void cast_ray(t_player *player, t_data *data, float angle, t_hit_info *hit);
 
 #endif
