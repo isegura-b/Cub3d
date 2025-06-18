@@ -9,12 +9,28 @@ char **get_map(void) //test sin gnl
     map[3] = "100000000000000000000000000001";
     map[4] = "100000000000010000000000000001";
     map[5] = "100000000000000100000000000001";
-    map[6] = "100000000000010000000000000001";
-    map[7] = "100000000000000000000000000001";
-    map[8] = "100000000000000000000000000001";
-    map[9] = "111111111111111111111111111111";
+    map[6] = "10000000000001000000000000000111111111111111";
+    map[7] = "10000000000000000000000000000000000000000001";
+    map[8] = "10000000000000000000000000000000000000000001";
+    map[9] = "11111111111111111111111111111111111111111111";
     map[10] = NULL;
     return (map);
+}
+
+void load_texture(t_data *data, t_texture *tex, char *path)
+{
+    tex->img = mlx_xpm_file_to_image(data->mlx, path, &tex->width, &tex->height);
+    if (!tex->img)
+    {
+        printf("Error: No se pudo cargar la textura: %s\n", path);
+        exit(EXIT_FAILURE);
+    }
+    tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_len, &tex->endian);
+    if (!tex->addr)
+    {
+        printf("Error: No se pudo obtener la dirección de memoria de la textura: %s\n", path);
+        exit(EXIT_FAILURE);
+    }
 }
 
 void    init_data(t_data *data)
@@ -26,6 +42,12 @@ void    init_data(t_data *data)
     data->player.data = data;
     data->map = get_map(); //gnl
     init_player(&data->player);
+    
+    // Cargar texturas
+    load_texture(data, &data->textures[NORTH], "textures/north.xpm");
+    load_texture(data, &data->textures[SOUTH], "textures/south.xpm");
+    load_texture(data, &data->textures[EAST], "textures/east.xpm");
+    load_texture(data, &data->textures[WEST], "textures/west.xpm");
 }
 
 void    init_player(t_player *player)

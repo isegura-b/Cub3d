@@ -33,6 +33,17 @@ enum
     WEST,
 } ;
 
+typedef struct s_texture
+{
+    void    *img;
+    char    *addr;
+    int     width;
+    int     height;
+    int     bpp;
+    int     line_len;
+    int     endian;
+}   t_texture;
+
 typedef struct s_player
 {
     float   x;
@@ -53,17 +64,18 @@ typedef struct s_player
 
 typedef struct s_data
 {
-    void    *mlx;
-    void    *win;
-    void    *img_prt;
+    void        *mlx;
+    void        *win;
+    void        *img_prt;
 
-    char    *info;
-    int     bpp;
-    int     line_len;
-    int     endian;
+    char        *info;
+    int         bpp;
+    int         line_len;
+    int         endian;
 
-    char    **map;
-    t_player player;
+    char        **map;
+    t_player    player;
+    t_texture  textures[4];
 
 }   t_data ;
 
@@ -115,13 +127,28 @@ void    move_player(t_player *player);
 //init
 void    init_data(t_data *data);
 void    init_player(t_player *player);
+void load_texture(t_data *data, t_texture *tex, char *path);
 
 //render
-int     draw_loop(t_data *data);
 void    clean_img(t_data *data);
-int    hit_ray(int x, int y, t_data *data);
+int     hit_ray(int x, int y, t_data *data);
+int     get_tex_pixel(t_texture *tex, int x, int y);
+void    draw_wall(t_player *player, t_data *data, float angle, int i);
+int     draw_loop(t_data *data);
 
 //dda
+void perform_dda(t_ray_vars *var, t_data *data);
+void calculate_hit_info(t_hit_info *hit, t_ray_vars *var);
+void init_ray_steps(t_ray_vars *var);
+void init_ray_vars(t_ray_vars *var, t_player *player, float angle);
 void cast_ray(t_player *player, t_data *data, float angle, t_hit_info *hit);
+
+//render_tex
+void draw_column(t_hit_info *hit, int i, t_data *data);
+float get_wall_hit_x(t_hit_info *hit);
+int get_tex_x(float wall_x, int side, t_texture *tex);
+void draw_sky(int x, int end_y, t_data *data);
+void draw_floor(int x, int start_y, t_data *data);
+void draw_tex_wall(t_hit_info *hit, int x, t_texture *tex, int tex_x, t_data *data);
 
 #endif

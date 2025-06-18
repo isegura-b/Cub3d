@@ -24,11 +24,16 @@ void perform_dda(t_ray_vars *var, t_data *data)
 
 void calculate_hit_info(t_hit_info *hit, t_ray_vars *var)
 {
-    //tamaño mapa - posicion + bloque mas cercano (/2 para que quede centrado)
     if (var->side == 0)
-        hit->distance = (var->map_x * WALL - var->pos_x + (1 - var->step_x) / 2 * WALL) / var->ray_dir_x;
+        hit->distance = (var->map_x * WALL - var->pos_x + (1 - var->step_x) / 2.0f * WALL) / var->ray_dir_x;
     else
-        hit->distance = (var->map_y * WALL - var->pos_y + (1 - var->step_y) / 2 * WALL) / var->ray_dir_y;
+        hit->distance = (var->map_y * WALL - var->pos_y + (1 - var->step_y) / 2.0f * WALL) / var->ray_dir_y;
+
+    // Coordenadas del punto de impacto para texturizado
+    hit->ray_x = var->pos_x + hit->distance * var->ray_dir_x;
+    hit->ray_y = var->pos_y + hit->distance * var->ray_dir_y;
+
+    // Determinar qué cara se golpeó
     if (var->side == 0)
     {
         if (var->ray_dir_x < 0)

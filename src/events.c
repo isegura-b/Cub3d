@@ -89,7 +89,7 @@ void move_player(t_player *player)
     float   cos_angle;
     float   sin_angle;
 
-    angle_speed = 0.02;
+    angle_speed = 0.03;
     speed = 3;
     cos_angle = cos(player->angle);
     sin_angle = sin(player->angle);

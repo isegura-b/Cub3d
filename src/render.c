@@ -18,42 +18,25 @@ void    clean_img(t_data *data)
     }
 }
 
-int    hit_ray(int x, int y, t_data *data)
+int     hit_ray(int x, int y, t_data *data)
 {
     if (data->map[y][x] == '1')
         return (1);
     return (0);
 }
 
-void draw_column(t_hit_info *hit, int i, t_data *data)
+int     get_tex_pixel(t_texture *tex, int x, int y) 
 {
-    int y;
-
-    y = 0;
-    while (y < hit->start_y) //sky
-        my_pixel_put(i, y++, 0x87CEEB, data);
-    while (y < hit->end_y)  //wall
-    {
-        if (hit->hit_side == NORTH)
-            my_pixel_put(i, y++, 0x00FF00, data);
-        else if (hit->hit_side == SOUTH)
-            my_pixel_put(i, y++, 0x0000FF, data);
-        else if (hit->hit_side == EAST)
-            my_pixel_put(i, y++, 0xFF00FF, data);
-        else 
-            my_pixel_put(i, y++, 0xFF0000, data);
-    }
-    while (y < HEIGHT) //floor
-        my_pixel_put(i, y++, 0x228B22, data);
+    return (*(unsigned int *)(tex->addr + (y * tex->line_len + x * (tex->bpp / 8))));
 }
 
-void draw_wall(t_player *player, t_data *data, float angle, int i)
+void    draw_wall(t_player *player, t_data *data, float angle, int i)
 {
     t_hit_info hit;
 
     cast_ray(player, data, angle, &hit);
     hit.distance = hit.distance * cos(angle - player->angle);
-    hit.height = (WALL / hit.distance) * WIDTH;
+    hit.height = (WALL / hit.distance) * 1000;
     hit.start_y = (int)((HEIGHT - hit.height) / 2);
     hit.end_y = (int)(hit.start_y + hit.height);
     draw_column(&hit, i, data);
