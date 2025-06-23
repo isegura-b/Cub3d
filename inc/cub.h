@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <math.h>
 #include "./mlx/mlx.h"
+#include "./get_next_line.h"
 
 # define WIDTH 1280
 # define HEIGHT 720
@@ -32,6 +33,26 @@ enum
     EAST,
     WEST,
 } ;
+
+typedef struct s_info_file
+{
+    //is texture
+    char    *no;
+    char    *so;
+    char    *ea;
+    char    *we;
+    //is color
+    int     floor;
+    int     sky;
+    //map
+    char    **map;
+    int     map_width;
+    int     map_hight;
+    int     player_x;
+    int     player_y;
+    float   player_angle;
+} t_info_file;
+
 
 typedef struct s_texture
 {
@@ -76,6 +97,7 @@ typedef struct s_data
     char        **map;
     t_player    player;
     t_texture  textures[4];
+    t_info_file info_file;
 
 }   t_data ;
 
@@ -116,7 +138,9 @@ int     parse_args(t_data *data, char *filename);
 //utils
 void    ft_error(char *error_str);
 void    my_pixel_put(int x, int y, int color, t_data *img);
-int	handle_exit(void *param);
+int     handle_exit(void *param);
+char    *ft_strdup(const char *s);
+char    *ft_strdup_path(const char *s);
 
 //events
 int     key_press(int keycode, t_player *player);
@@ -127,7 +151,9 @@ void    move_player(t_player *player);
 //init
 void    init_data(t_data *data);
 void    init_player(t_player *player);
-void load_texture(t_data *data, t_texture *tex, char *path);
+void    load_texture(t_data *data, t_texture *tex, char *path);
+void    init_info_file(t_info_file *info_file);
+void    init_textures(t_data *data);
 
 //render
 void    clean_img(t_data *data);
@@ -147,8 +173,29 @@ void cast_ray(t_player *player, t_data *data, float angle, t_hit_info *hit);
 void draw_column(t_hit_info *hit, int i, t_data *data);
 float get_wall_hit_x(t_hit_info *hit);
 int get_tex_x(float wall_x, int side, t_texture *tex);
-void draw_sky(int x, int end_y, t_data *data);
-void draw_floor(int x, int start_y, t_data *data);
-void draw_tex_wall(t_hit_info *hit, int x, t_texture *tex, int tex_x, t_data *data);
+void    draw_sky(int x, int end_y, t_data *data);
+void    draw_floor(int x, int start_y, t_data *data);
+void    draw_tex_wall(t_hit_info *hit, int x, t_texture *tex, int tex_x, t_data *data);
+
+//path file info
+int	    is_empty_line(const char *line);
+int     is_texture(char *line);
+int     is_color(char *line);
+int     is_map_line(char *line);
+
+//save_info files
+void    info_texture(char *line, t_info_file *info_file);
+int     rgb_to_int(const char *str);
+void    info_colors(char *line, t_info_file *info_file);
+int    ft_map(char *line, t_info_file *info_file);
+
+//gnl
+char	*get_next_line(int fd);
+
+//gnl_utils
+void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_strjoin(char *s1, char *s2);
+size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
 
 #endif

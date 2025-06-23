@@ -20,6 +20,8 @@ void    clean_img(t_data *data)
 
 int     hit_ray(int x, int y, t_data *data)
 {
+    if (y < 0 || y >= HEIGHT || x < 0 || x >= WIDTH)
+        return (1);
     if (data->map[y][x] == '1')
         return (1);
     return (0);
