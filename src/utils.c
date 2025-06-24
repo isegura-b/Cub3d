@@ -18,9 +18,7 @@ void	my_pixel_put(int x, int y, int color, t_data *img)
 
 int	handle_exit(void *param)
 {
-	t_data *data = (t_data *)param;
-
-	mlx_destroy_window(data->mlx, data->win);
+	cleanup_data((t_data *)param);
 	exit(0);
 	return (0);
 }

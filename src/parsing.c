@@ -45,28 +45,19 @@ static int	check_map(t_data *data, char *filename)
 		return (ft_error("Could not open .cub file"), 1);
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		printf("%s", line);
 		if (is_empty_line(line))
 		{
-			printf("EMPTY\n");
 			free(line);
 			continue;
 		}
 		if (is_map_started == 0)
 		{
 			if (is_texture(line))
-			{
-				printf("1\n");
 				info_texture(line, &info_file);
-			}
 			else if (is_color(line))
-			{
-				printf("2\n");
 				info_colors(line, &info_file);
-			}
 			else if (is_map_line(line))
 			{
-				printf("3\n");
 				if (!info_file.no || !info_file.so || !info_file.ea || !info_file.we ||
 					info_file.floor == -1 || info_file.sky == -1)
 				{
@@ -85,7 +76,6 @@ static int	check_map(t_data *data, char *filename)
 		}
 		if (is_map_started)
 		{
-			ft_map(line, &info_file);
 			if (ft_map(line, &info_file))
 			{
 				free(line);
@@ -109,5 +99,7 @@ int parse_args(t_data *data, char *filename)
         return (1);
     if (check_map(data, filename))
         return (1);
+    if (find_player_position(data))
+		return (1);
     return (0);
 }

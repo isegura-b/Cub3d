@@ -154,6 +154,7 @@ void    init_player(t_player *player);
 void    load_texture(t_data *data, t_texture *tex, char *path);
 void    init_info_file(t_info_file *info_file);
 void    init_textures(t_data *data);
+void    cleanup_data(t_data *data);
 
 //render
 void    clean_img(t_data *data);
@@ -188,6 +189,7 @@ void    info_texture(char *line, t_info_file *info_file);
 int     rgb_to_int(const char *str);
 void    info_colors(char *line, t_info_file *info_file);
 int    ft_map(char *line, t_info_file *info_file);
+int    find_player_position(t_data *data);
 
 //gnl
 char	*get_next_line(int fd);
