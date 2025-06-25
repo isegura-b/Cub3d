@@ -54,14 +54,11 @@ int ft_map(char *line, t_info_file *info_file)
     int j;
     char **new_map;
     int len;
-    char *clean_line;
 
     i = 0;
-    // Saltar espacios al inicio
     while (line[i] == ' ' || line[i] == '\t')
-        i++;
-    clean_line = line + i;
-    len = ft_strlen(clean_line);
+        line[i] = 1;
+    len = ft_strlen(line);
     new_map = malloc(sizeof(char *) * (info_file->map_hight + 2));
     if (!new_map)
         return (free(new_map), 1);
@@ -75,7 +72,7 @@ int ft_map(char *line, t_info_file *info_file)
         }
         free(info_file->map);
     }
-    new_map[info_file->map_hight] = ft_strdup(clean_line);
+    new_map[info_file->map_hight] = ft_strdup(line);
     new_map[info_file->map_hight + 1] = NULL;
     info_file->map = new_map;
     if (len > info_file->map_width)
@@ -102,7 +99,7 @@ int find_player_position(t_data *data)
                 data->player.y = y * WALL + WALL / 2;
 
                 if (data->map[y][x] == 'N')
-                    data->player.angle = -PI / 2;
+                    data->player.angle = 3 * PI / 2;
                 else if (data->map[y][x] == 'S')
                     data->player.angle = PI / 2;
                 else if (data->map[y][x] == 'E')

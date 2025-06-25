@@ -31,6 +31,34 @@ static int parse_file(t_data *data, char *filename)
     return (0);
 }
 
+int	closed_map(t_data *data)
+{
+    int i;
+	int j;
+	int	cols;
+	int	rows;
+	char	**mapa;
+
+    j = 0;
+	mapa = data->info_file.map;
+	cols = data->info_file.map_width;
+	rows = data->info_file.map_hight;
+    while (j < cols) 
+	{
+        if (mapa[0][j] != '1')
+            return 0;
+        j++;
+    }
+    i = 1;
+    while (i < rows - '1') 
+	{
+        if (mapa[i][0] != '1' || mapa[i][cols - 1] != '1')
+            return 0;
+        i++;
+    }
+    return (1);
+}
+
 static int	check_map(t_data *data, char *filename)
 {
 	int			fd;
@@ -65,6 +93,12 @@ static int	check_map(t_data *data, char *filename)
 					close(fd);
 					return (ft_error("Missing textures or colors before the map"), 1);
 				}
+				else if (is_map_line(line) == 2)
+				{
+					free(line);
+					close(fd);
+					return(ft_error("Invalid char in map"), 1);
+				}
 				is_map_started = 1;
 			}
 			else if (is_map_line(line) != -1 || is_texture(line) != -1 || is_color(line) != -1)
@@ -90,6 +124,8 @@ static int	check_map(t_data *data, char *filename)
 		return (ft_error("No valid map found in .cub file"), 1);
 	data->info_file = info_file;
     data->map = data->info_file.map;
+	if (closed_map(data))
+		return (1);
 	return (0);
 }
 

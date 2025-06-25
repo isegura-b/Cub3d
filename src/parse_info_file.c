@@ -112,12 +112,9 @@ int is_map_line(char *line)
         i++;
     while (line[i])
     {
-        if (line[i] != '1' && line[i] != '0' &&
-            line[i] != 'N' && line[i] != 'S' &&
-            line[i] != 'E' && line[i] != 'W' &&
-            line[i] != ' ' && line[i] != '\n' && line[i] != '\r') 
+        if (line[i] != '1' && line[i] != ' ' && line[i] != '\n' && line[i] != '\r') 
         {
-            return(ft_error("Invalid char in map"), 0);
+            return(2);
         }
         i++;
     }
