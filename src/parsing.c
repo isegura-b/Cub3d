@@ -124,8 +124,6 @@ static int	check_map(t_data *data, char *filename)
 		return (ft_error("No valid map found in .cub file"), 1);
 	data->info_file = info_file;
     data->map = data->info_file.map;
-	if (closed_map(data))
-		return (1);
 	return (0);
 }
 

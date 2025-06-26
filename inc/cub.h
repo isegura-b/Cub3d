@@ -200,4 +200,7 @@ char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
 
+void draw_minimap(t_data *data);
+void draw_square_test(int x, int y, int size, int color, t_data *data);
+
 #endif
