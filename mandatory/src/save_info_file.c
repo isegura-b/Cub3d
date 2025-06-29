@@ -48,21 +48,22 @@ void info_colors(char *line, t_info_file *info_file)
         info_file->sky = rgb_to_int(line + i);
 }
 
+size_t ft_maplen(const char *s)
+{
+    size_t len = 0;
+    
+    while (s[len] && s[len] != '\n' && s[len] != '\r')
+        len++;
+    return (len);
+}
+
 int ft_map(char *line, t_info_file *info_file)
 {
-    int i;
     int j;
     char **new_map;
     int len;
 
-    i = 0;
-    printf("%s", line);
-    while (line[i] == ' ' || line[i] == '\t')
-    {
-        line[i] = 1;
-        i++;
-    }
-    len = ft_strlen(line);
+    len = ft_maplen(line);
     new_map = malloc(sizeof(char *) * (info_file->map_hight + 2));
     if (!new_map)
         return (free(new_map), 1);

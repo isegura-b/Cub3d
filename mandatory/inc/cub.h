@@ -204,4 +204,6 @@ char	*ft_strchr(const char *s, int c);
 void draw_minimap(t_data *data);
 void draw_square_test(int x, int y, int size, int color, t_data *data);
 
+size_t	ft_maplen(const char *s);
+
 #endif

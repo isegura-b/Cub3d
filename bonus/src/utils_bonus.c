@@ -2,7 +2,8 @@
 
 void	ft_error(char *error_str)
 {
-	printf("Error : %s\n", error_str);
+    if (error_str)
+	    printf("Error : %s\n", error_str);
 	exit(EXIT_FAILURE);
 }
 
