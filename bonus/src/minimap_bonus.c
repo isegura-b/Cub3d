@@ -45,7 +45,7 @@ static void draw_minimap_background(t_rect rect, int color, t_data *data)
     int j;
 
     i = 0;
-    while (i < rect.w)
+    while (i  < rect.w)
     {
         j = 0;
         while (j < rect.h)
@@ -86,7 +86,8 @@ static void draw_map_row(char *row, int len, int y, t_minimap *m)
     {
         cx = m->x + x * m->size;
         cy = m->y + y * m->size;
-        draw_cell_background(cx, cy, m->size, m->data);
+        if (row[x] != ' ' && row[x] != '\t')
+            draw_cell_background(cx, cy, m->size, m->data);
         if (row[x] == '1')
             draw_square_test(cx, cy, m->size, 0xFFFFFF, m->data);
         x++;

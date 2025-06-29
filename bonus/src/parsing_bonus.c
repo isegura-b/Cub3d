@@ -133,6 +133,8 @@ int parse_args(t_data *data, char *filename)
         return (1);
     if (check_map(data, filename))
         return (1);
+	if (closed_map(data))
+		return (ft_error("Map is not closed"), 1);
     if (find_player_position(data))
 		return (1);
     return (0);
