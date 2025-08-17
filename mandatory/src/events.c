@@ -57,22 +57,17 @@ int	key_release(int keycode, t_player *player)
 	return (0);
 }
 
-
 int	wall_stop(t_player *player)
 {
 	float	dx;
 	float	dy;
-	float	next_x;
-	float	next_y;
 	int		map_x;
 	int		map_y;
 
 	if (!get_step(player, &dx, &dy))
 		return (0);
-	next_x = player->x + dx;
-	next_y = player->y + dy;
-	map_x = (int)(next_x / WALL);
-	map_y = (int)(next_y / WALL);
+	map_x = (int)((player->x + dx) / WALL);
+	map_y = (int)((player->y + dy) / WALL);
 	if (player->data->map[map_y][map_x] == '1')
 		return (1);
 	return (0);
@@ -81,40 +76,18 @@ int	wall_stop(t_player *player)
 void	move_player(t_player *player)
 {
 	int		speed;
-	float	angle_speed;
-	float	cos_angle;
-	float	sin_angle;
+	float	dx;
+	float	dy;
 
 	speed = 6;
-	angle_speed = 0.05;
-	cos_angle = cos(player->angle);
-	sin_angle = sin(player->angle);
 	if (player->left_r)
-		player->angle -= angle_speed;
+		player->angle -= 0.05f;
 	if (player->right_r)
-		player->angle += angle_speed;
-	if (player->angle > 2 * PI)
-		player->angle = 0;
-	if (player->angle < 0)
-		player->angle = 2 * PI;
-	if (player->key_up && !wall_stop(player))
+		player->angle += 0.05f;
+	normalize_angle(player);
+	if (get_dir(player, &dx, &dy) && !wall_stop(player))
 	{
-		player->x += cos_angle * speed;
-		player->y += sin_angle * speed;
-	}
-	else if (player->key_down && !wall_stop(player))
-	{
-		player->x -= cos_angle * speed;
-		player->y -= sin_angle * speed;
-	}
-	else if (player->key_left && !wall_stop(player))
-	{
-		player->x += sin_angle * speed;
-		player->y -= cos_angle * speed;
-	}
-	else if (player->key_right && !wall_stop(player))
-	{
-		player->x -= sin_angle * speed;
-		player->y += cos_angle * speed;
+		player->x += dx * speed;
+		player->y += dy * speed;
 	}
 }

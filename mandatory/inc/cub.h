@@ -218,4 +218,10 @@ void				draw_square_test(int x, int y, int size, int color, t_data *data);
 size_t				ft_maplen(const char *s);
 int 				get_step(const t_player *p, float *dx, float *dy);
 
+//utils2
+
+int					get_step(const t_player *p, float *dx, float *dy);
+int					get_dir(const t_player *p, float *dx, float *dy)
+void				normalize_angle(t_player *p)
+
 #endif
