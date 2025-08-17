@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 15:38:51 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/17 16:02:27 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:26:03 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,45 +34,55 @@ static int	flood_fill(t_mapinfo *info, int x, int y)
 	return (1);
 }
 
-int	is_map_closed(char **map, int height, int width)
+int	find_player(char **map, int h, int w, t_point *p)
 {
-	t_mapinfo	info;
-	char		**temp;
+	int	i;
+	int	j;
 
-	int i, j, x, y, result;
-	temp = copy_map(map, height, width);
-	if (!temp)
-		return (-1);
-	info.map = temp;
-	info.width = width;
-	info.height = height;
-	x = -1;
-	y = -1;
 	i = 0;
-	while (i < height && y == -1)
+	while (i < h)
 	{
 		j = 0;
-		while (j < width)
+		while (j < w)
 		{
-			if (temp[i][j] == 'N' || temp[i][j] == 'S' || temp[i][j] == 'E'
-				|| temp[i][j] == 'W')
+			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
+				|| map[i][j] == 'W')
 			{
-				y = i;
-				x = j;
-				break ;
+				p->x = j;
+				p->y = i;
+				return (1);
 			}
 			j++;
 		}
 		i++;
 	}
-	if (x == -1 || y == -1)
+	return (0);
+}
+
+int	is_map_closed(char **map, int h, int w)
+{
+	t_mapinfo	info;
+	char		**tmp;
+	t_point		player;
+
+	tmp = copy_map(map, h, w);
+	if (!tmp)
+		return (-1);
+	info.map = tmp;
+	info.width = w;
+	info.height = h;
+	if (!find_player(tmp, h, w, &player))
 	{
-		free_map(temp, height);
+		free_map(tmp, h);
 		return (0);
 	}
-	result = flood_fill(&info, x, y);
-	free_map(temp, height);
-	return (result);
+	if (!flood_fill(&info, player.x, player.y))
+	{
+		free_map(tmp, h);
+		return (0);
+	}
+	free_map(tmp, h);
+	return (1);
 }
 
 static int	check_map(t_data *data, char *filename)

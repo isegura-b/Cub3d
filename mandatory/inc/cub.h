@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 13:47:23 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/17 15:54:07 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:24:41 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,12 @@ typedef struct s_mapinfo
 	int		width;
 	int		height;
 }	t_mapinfo;
+
+typedef struct s_point {
+    int x;
+    int y;
+} t_point;
+
 
 // parsing
 int					parse_args(t_data *data, char *filename);
