@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gnl_cub_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/17 13:54:15 by isegura-          #+#    #+#             */
+/*   Updated: 2025/08/17 13:54:16 by isegura-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
@@ -19,10 +31,10 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t		i;
-	size_t		s1_len;
-	size_t		s2_len;
-	char		*mem;
+	size_t	i;
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*mem;
 
 	i = 0;
 	if (!s1 || !s2)

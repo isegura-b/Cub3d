@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/17 13:51:36 by isegura-          #+#    #+#             */
+/*   Updated: 2025/08/17 13:51:45 by isegura-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
 
 int	window_close(t_data *data)
@@ -49,8 +61,8 @@ int	wall_stop(t_player *player)
 {
 	float	next_x;
 	float	next_y;
-	int	    map_x;
-	int	    map_y;
+	int		map_x;
+	int		map_y;
 
 	if (player->key_up)
 	{

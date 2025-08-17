@@ -6,7 +6,7 @@
 /*   By: hellkid <hellkid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 15:00:00 by hellkid          #+#    #+#             */
-/*   Updated: 2025/08/07 15:00:00 by hellkid         ###   ########.fr       */
+/*   Updated: 2025/08/17 14:01:31 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	load_texture(t_data *data, t_texture *tex, char *path)
 {
-	tex->img = mlx_xpm_file_to_image(data->mlx,
-			path, &tex->width, &tex->height);
+	tex->img = mlx_xpm_file_to_image(data->mlx, path, &tex->width,
+			&tex->height);
 	if (!tex->img)
 	{
-		printf("Error: No se pudo cargar la textura: %s\n", path);
+		printf("Error: Texture could not be loaded: %s\n", path);
 		exit(EXIT_FAILURE);
 	}
-	tex->addr = mlx_get_data_addr(tex->img,
-			&tex->bpp, &tex->line_len, &tex->endian);
+	tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_len,
+			&tex->endian);
 	if (!tex->addr)
 	{
-		printf("Error: No se pudo obtener la dirección de memoria de la textura: %s\n", path);
+		printf("Error: Coudn't find texture: %s\n", path);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -59,53 +59,21 @@ void	init_info_file(t_info_file *info_file)
 void	init_data(t_data *data)
 {
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx,
-			WIDTH, HEIGHT, "Cub3D");
-	data->img_prt = mlx_new_image(data->mlx,
-			WIDTH, HEIGHT);
-	data->info = mlx_get_data_addr(data->img_prt,
-			&data->bpp, &data->line_len, &data->endian);
+	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Cub3D");
+	data->img_prt = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	data->info = mlx_get_data_addr(data->img_prt, &data->bpp, &data->line_len,
+			&data->endian);
 	data->player.data = data;
 	init_player(&data->player);
 }
 
 void	init_textures(t_data *data)
 {
-	if (!data->info_file.no || !data->info_file.so
-		|| !data->info_file.ea || !data->info_file.we)
-		ft_error("Faltan texturas en el archivo .cub");
+	if (!data->info_file.no || !data->info_file.so || !data->info_file.ea
+		|| !data->info_file.we)
+		ft_error("Texture missing in the .cub file");
 	load_texture(data, &data->textures[NORTH], data->info_file.no);
 	load_texture(data, &data->textures[SOUTH], data->info_file.so);
 	load_texture(data, &data->textures[EAST], data->info_file.ea);
 	load_texture(data, &data->textures[WEST], data->info_file.we);
-}
-
-void	cleanup_data(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	if (data->info_file.no)
-		free(data->info_file.no);
-	if (data->info_file.so)
-		free(data->info_file.so);
-	if (data->info_file.ea)
-		free(data->info_file.ea);
-	if (data->info_file.we)
-		free(data->info_file.we);
-	if (data->info_file.map)
-	{
-		while (data->info_file.map[i])
-		{
-			free(data->info_file.map[i]);
-			i++;
-		}
-		free(data->info_file.map);
-	}
-	if (data->img_prt)
-		mlx_destroy_image(data->mlx, data->img_prt);
-	if (data->win)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx)
-		mlx_destroy_display(data->mlx);
 }

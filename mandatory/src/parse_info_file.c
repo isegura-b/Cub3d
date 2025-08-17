@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_info_file.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/17 14:05:22 by isegura-          #+#    #+#             */
+/*   Updated: 2025/08/17 14:05:24 by isegura-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
 
 int	is_empty_line(const char *line)
@@ -7,8 +19,8 @@ int	is_empty_line(const char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != ' '
-			&& line[i] != '\t' && line[i] != '\n' && line[i] != '\r')
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n'
+			&& line[i] != '\r')
 			return (0);
 		i++;
 	}

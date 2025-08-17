@@ -49,8 +49,8 @@ void	draw_floor(int x, int start_y, t_data *data)
 	}
 }
 
-void	draw_tex_wall(t_hit_info *hit, int x, t_texture *tex,
-			int tex_x, t_data *data)
+void	draw_tex_wall(t_hit_info *hit, int x, t_texture *tex, int tex_x,
+		t_data *data)
 {
 	int	wall_height;
 	int	y;

@@ -34,9 +34,8 @@ static int	parse_file(t_data *data, char *filename)
 
 static int	is_invalid_char(char c)
 {
-	return (c != '0' && c != '1' && c != 'N' && c != 'S'
-		&& c != 'E' && c != 'W' && c != ' ' && c != '\t'
-		&& c != '\r' && c != '\n');
+	return (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'E' && c != 'W'
+		&& c != ' ' && c != '\t' && c != '\r' && c != '\n');
 }
 
 static void	free_map(char **map, int height)
@@ -132,8 +131,8 @@ int	is_map_closed(char **map, int height, int width)
 		j = 0;
 		while (j < width)
 		{
-			if (temp[i][j] == 'N' || temp[i][j] == 'S'
-				|| temp[i][j] == 'E' || temp[i][j] == 'W')
+			if (temp[i][j] == 'N' || temp[i][j] == 'S' || temp[i][j] == 'E'
+				|| temp[i][j] == 'W')
 			{
 				y = i;
 				x = j;
@@ -224,11 +223,11 @@ int	parse_args(t_data *data, char *filename)
 		return (1);
 	if (check_map(data, filename))
 		return (1);
-	if (!is_map_closed(data->info_file.map,
-			data->info_file.map_hight, data->info_file.map_width))
+	if (!is_map_closed(data->info_file.map, data->info_file.map_hight,
+			data->info_file.map_width))
 		return (ft_error("Map is not closed"), 1);
-	if (is_map_closed(data->info_file.map,
-			data->info_file.map_hight, data->info_file.map_width) == -1)
+	if (is_map_closed(data->info_file.map, data->info_file.map_hight,
+			data->info_file.map_width) == -1)
 		return (ft_error(NULL), 1);
 	if (find_player_position(data))
 		return (1);

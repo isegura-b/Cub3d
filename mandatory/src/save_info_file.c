@@ -104,8 +104,8 @@ int	find_player_position(t_data *data)
 		x = 0;
 		while (data->map[y][x])
 		{
-			if (data->map[y][x] == 'N' || data->map[y][x] == 'S' ||
-				data->map[y][x] == 'E' || data->map[y][x] == 'W')
+			if (data->map[y][x] == 'N' || data->map[y][x] == 'S'
+				|| data->map[y][x] == 'E' || data->map[y][x] == 'W')
 			{
 				data->player.x = x * WALL + WALL / 2;
 				data->player.y = y * WALL + WALL / 2;

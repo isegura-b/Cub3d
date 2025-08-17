@@ -29,8 +29,8 @@ int	hit_ray(int x, int y, t_data *data)
 
 int	get_tex_pixel(t_texture *tex, int x, int y)
 {
-	return (*(unsigned int *)(tex->addr
-		+ (y * tex->line_len + x * (tex->bpp / 8))));
+	return (*(unsigned int *)(tex->addr + (y * tex->line_len + x * (tex->bpp
+					/ 8))));
 }
 
 void	draw_wall(t_player *player, t_data *data, float angle, int i)
@@ -64,7 +64,6 @@ int	draw_loop(t_data *data)
 		start_x += pov;
 		i++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win,
-		data->img_prt, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->img_prt, 0, 0);
 	return (0);
 }
