@@ -6,9 +6,11 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 14:00:53 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/17 14:04:20 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/17 15:12:20 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../inc/cub.h"
 
 void	cleanup_textures(t_data *data)
 {

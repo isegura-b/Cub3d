@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 13:47:23 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/17 13:49:48 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/17 15:15:05 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,5 +216,6 @@ void				draw_minimap(t_data *data);
 void				draw_square_test(int x, int y, int size, int color, t_data *data);
 
 size_t				ft_maplen(const char *s);
+int 				get_step(const t_player *p, float *dx, float *dy);
 
 #endif
