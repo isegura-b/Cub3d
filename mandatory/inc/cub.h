@@ -144,21 +144,21 @@ typedef struct s_ray_vars
 
 typedef struct s_wall_info
 {
-	t_hit_info	*hit;
-	int			x;
-	t_texture	*tex;
-	int			tex_x;
-	t_data		*data;
-}	t_wall_info;
+	t_hit_info		*hit;
+	int				x;
+	t_texture		*tex;
+	int				tex_x;
+	t_data			*data;
+}					t_wall_info;
 
 typedef struct s_wall_calc
 {
-	int	wall_height;
-	int	y;
-	int	d;
-	int	tex_y;
-	int	color;
-}	t_wall_calc;
+	int				wall_height;
+	int				y;
+	int				d;
+	int				tex_y;
+	int				color;
+}					t_wall_calc;
 
 // parsing
 int					parse_args(t_data *data, char *filename);
@@ -196,7 +196,8 @@ int					draw_loop(t_data *data);
 void				perform_dda(t_ray_vars *var, t_data *data);
 void				calculate_hit_info(t_hit_info *hit, t_ray_vars *var);
 void				init_ray_steps(t_ray_vars *var);
-void				init_ray_vars(t_ray_vars *var, t_player *player, float angle);
+void				init_ray_vars(t_ray_vars *var, t_player *player,
+						float angle);
 void				cast_ray(t_player *player, t_data *data, float angle,
 						t_hit_info *hit);
 
@@ -206,7 +207,8 @@ float				get_wall_hit_x(t_hit_info *hit);
 int					get_tex_x(float wall_x, int side, t_texture *tex);
 void				draw_sky(int x, int end_y, t_data *data);
 void				draw_floor(int x, int start_y, t_data *data);
-void				draw_tex_wall(t_hit_info *hit, int x, t_texture *tex, int tex_x, t_data *data);
+void				draw_tex_wall(t_hit_info *hit, int x, t_texture *tex,
+						int tex_x, t_data *data);
 
 // path file info
 int					is_empty_line(const char *line);
@@ -231,12 +233,13 @@ size_t				ft_strlen(const char *s);
 char				*ft_strchr(const char *s, int c);
 
 void				draw_minimap(t_data *data);
-void				draw_square_test(int x, int y, int size, int color, t_data *data);
+void				draw_square_test(int x, int y, int size, int color,
+						t_data *data);
 
 size_t				ft_maplen(const char *s);
-int 				get_step(const t_player *p, float *dx, float *dy);
+int					get_step(const t_player *p, float *dx, float *dy);
 
-//utils2
+// utils2
 
 int					get_step(const t_player *p, float *dx, float *dy);
 int					get_dir(const t_player *p, float *dx, float *dy);
