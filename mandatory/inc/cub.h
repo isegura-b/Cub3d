@@ -241,5 +241,6 @@ int 				get_step(const t_player *p, float *dx, float *dy);
 int					get_step(const t_player *p, float *dx, float *dy);
 int					get_dir(const t_player *p, float *dx, float *dy);
 void				normalize_angle(t_player *p);
+float				dir_angle(char c);
 
 #endif

@@ -92,37 +92,3 @@ int	ft_map(char *line, t_info_file *info_file)
 	info_file->map_hight++;
 	return (0);
 }
-
-int	find_player_position(t_data *data)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (data->map[y])
-	{
-		x = 0;
-		while (data->map[y][x])
-		{
-			if (data->map[y][x] == 'N' || data->map[y][x] == 'S'
-				|| data->map[y][x] == 'E' || data->map[y][x] == 'W')
-			{
-				data->player.x = x * WALL + WALL / 2;
-				data->player.y = y * WALL + WALL / 2;
-				if (data->map[y][x] == 'N')
-					data->player.angle = 3 * PI / 2;
-				else if (data->map[y][x] == 'S')
-					data->player.angle = PI / 2;
-				else if (data->map[y][x] == 'E')
-					data->player.angle = 0;
-				else if (data->map[y][x] == 'W')
-					data->player.angle = PI;
-				data->map[y][x] = '0';
-				return (0);
-			}
-			x++;
-		}
-		y++;
-	}
-	return (ft_error("Player position not found"), 1);
-}
