@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aprenafe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/17 14:08:52 by aprenafe          #+#    #+#             */
+/*   Updated: 2025/08/17 14:10:51 by aprenafe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
 
 void	clean_img(t_data *data)
@@ -30,7 +42,7 @@ int	hit_ray(int x, int y, t_data *data)
 int	get_tex_pixel(t_texture *tex, int x, int y)
 {
 	return (*(unsigned int *)(tex->addr + (y * tex->line_len + x * (tex->bpp
-					/ 8))));
+				/ 8))));
 }
 
 void	draw_wall(t_player *player, t_data *data, float angle, int i)
