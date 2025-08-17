@@ -57,35 +57,20 @@ int	key_release(int keycode, t_player *player)
 	return (0);
 }
 
+
 int	wall_stop(t_player *player)
 {
+	float	dx;
+	float	dy;
 	float	next_x;
 	float	next_y;
 	int		map_x;
 	int		map_y;
 
-	if (player->key_up)
-	{
-		next_x = player->x + cos(player->angle) * 3;
-		next_y = player->y + sin(player->angle) * 3;
-	}
-	else if (player->key_down)
-	{
-		next_x = player->x - cos(player->angle) * 3;
-		next_y = player->y - sin(player->angle) * 3;
-	}
-	else if (player->key_left)
-	{
-		next_x = player->x + sin(player->angle) * 3;
-		next_y = player->y - cos(player->angle) * 3;
-	}
-	else if (player->key_right)
-	{
-		next_x = player->x - sin(player->angle) * 3;
-		next_y = player->y + cos(player->angle) * 3;
-	}
-	else
+	if (!get_step(player, &dx, &dy))
 		return (0);
+	next_x = player->x + dx;
+	next_y = player->y + dy;
 	map_x = (int)(next_x / WALL);
 	map_y = (int)(next_y / WALL);
 	if (player->data->map[map_y][map_x] == '1')
