@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 15:34:01 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/17 16:16:24 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:35:12 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int	is_texture(char *line)
 	}
 	return (0);
 }
+
 int	error_close(int fd, char *line)
 {
 	if (line)
