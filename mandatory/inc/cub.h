@@ -254,6 +254,12 @@ void				normalize_angle(t_player *p);
 float				dir_angle(char c);
 static char			*alloc_copy_row(const char *src, int width, int row);
 char				**copy_map(char **map, int height, int width);
+int					is_cub_file(char *filename);
+int					parse_file(t_data *data, char *filename);
+int					is_invalid_char(char c);
+void				free_map(char **map, int height);
+
+
 
 
 

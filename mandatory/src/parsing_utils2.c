@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../inc/cub.h"
 
 int	is_cub_file(char *filename)
@@ -62,4 +61,3 @@ void	free_map(char **map, int height)
 	}
 	free(map);
 }
-

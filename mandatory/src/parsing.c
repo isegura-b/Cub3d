@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
+
 static int	flood_fill(t_mapinfo *info, int x, int y)
 {
 	if (x < 0 || y < 0 || x >= info->width || y >= info->height)
