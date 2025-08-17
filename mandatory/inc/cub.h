@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 13:47:23 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/17 16:24:41 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:32:12 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,16 +162,16 @@ typedef struct s_wall_calc
 
 typedef struct s_mapinfo
 {
-	char	**map;
-	int		width;
-	int		height;
-}	t_mapinfo;
+	char			**map;
+	int				width;
+	int				height;
+}					t_mapinfo;
 
-typedef struct s_point {
-    int x;
-    int y;
-} t_point;
-
+typedef struct s_point
+{
+	int				x;
+	int				y;
+}					t_point;
 
 // parsing
 int					parse_args(t_data *data, char *filename);
@@ -220,8 +220,7 @@ float				get_wall_hit_x(t_hit_info *hit);
 int					get_tex_x(float wall_x, int side, t_texture *tex);
 void				draw_sky(int x, int end_y, t_data *data);
 void				draw_floor(int x, int start_y, t_data *data);
-void				draw_tex_wall(t_hit_info *hit, int x, t_texture *tex,
-						int tex_x, t_data *data);
+void				draw_tex_wall(t_wall_info *w);
 
 // path file info
 int					is_empty_line(const char *line);
@@ -246,8 +245,6 @@ size_t				ft_strlen(const char *s);
 char				*ft_strchr(const char *s, int c);
 
 void				draw_minimap(t_data *data);
-void				draw_square_test(int x, int y, int size, int color,
-						t_data *data);
 
 size_t				ft_maplen(const char *s);
 int					get_step(const t_player *p, float *dx, float *dy);
@@ -264,9 +261,5 @@ int					is_cub_file(char *filename);
 int					parse_file(t_data *data, char *filename);
 int					is_invalid_char(char c);
 void				free_map(char **map, int height);
-
-
-
-
 
 #endif
