@@ -261,5 +261,7 @@ int					is_cub_file(char *filename);
 int					parse_file(t_data *data, char *filename);
 int					is_invalid_char(char c);
 void				free_map(char **map, int height);
+int					check_map(t_data *data, char *filename);
+int					error_close(int fd, char *line);
 
 #endif

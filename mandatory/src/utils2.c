@@ -97,3 +97,10 @@ int	is_texture(char *line)
 	}
 	return (0);
 }
+int	error_close(int fd, char *line)
+{
+	if (line)
+		free(line);
+	close(fd);
+	return (1);
+}
