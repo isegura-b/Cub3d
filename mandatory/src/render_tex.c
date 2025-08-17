@@ -6,7 +6,7 @@
 /*   By: aprenafe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 14:11:27 by aprenafe          #+#    #+#             */
-/*   Updated: 2025/08/17 14:11:32 by aprenafe         ###   ########.fr       */
+/*   Updated: 2025/08/17 14:36:07 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,52 +37,23 @@ int	get_tex_x(float wall_x, int side, t_texture *tex)
 	return (tex_x);
 }
 
-void	draw_sky(int x, int end_y, t_data *data)
+void	draw_tex_wall(t_wall_info *w)
 {
-	int	y;
+	t_wall_calc	c;
 
-	y = 0;
-	while (y < end_y)
+	c.wall_height = w->hit->end_y - w->hit->start_y;
+	c.y = w->hit->start_y;
+	while (c.y < w->hit->end_y)
 	{
-		my_pixel_put(x, y, data->info_file.sky, data);
-		y++;
-	}
-}
-
-void	draw_floor(int x, int start_y, t_data *data)
-{
-	int	y;
-
-	y = start_y;
-	while (y < HEIGHT)
-	{
-		my_pixel_put(x, y, data->info_file.floor, data);
-		y++;
-	}
-}
-
-void	draw_tex_wall(t_hit_info *hit, int x, t_texture *tex, int tex_x,
-		t_data *data)
-{
-	int	wall_height;
-	int	y;
-	int	d;
-	int	tex_y;
-	int	color;
-
-	wall_height = hit->end_y - hit->start_y;
-	y = hit->start_y;
-	while (y < hit->end_y)
-	{
-		d = y - hit->start_y;
-		tex_y = (int)((float)d / wall_height * tex->height);
-		if (tex_y < 0)
-			tex_y = 0;
-		if (tex_y >= tex->height)
-			tex_y = tex->height - 1;
-		color = get_tex_pixel(tex, tex_x, tex_y);
-		my_pixel_put(x, y, color, data);
-		y++;
+		c.d = c.y - w->hit->start_y;
+		c.tex_y = (int)((float)c.d / c.wall_height * w->tex->height);
+		if (c.tex_y < 0)
+			c.tex_y = 0;
+		if (c.tex_y >= w->tex->height)
+			c.tex_y = w->tex->height - 1;
+		c.color = get_tex_pixel(w->tex, w->tex_x, c.tex_y);
+		my_pixel_put(w->x, c.y, c.color, w->data);
+		c.y++;
 	}
 }
 
@@ -91,11 +62,17 @@ void	draw_column(t_hit_info *hit, int i, t_data *data)
 	float		wall_x;
 	t_texture	tex;
 	int			tex_x;
+	t_wall_info	w;
 
 	wall_x = get_wall_hit_x(hit);
 	tex = data->textures[hit->hit_side];
 	tex_x = get_tex_x(wall_x, hit->hit_side, &tex);
 	draw_sky(i, hit->start_y, data);
-	draw_tex_wall(hit, i, &tex, tex_x, data);
+	w.hit = hit;
+	w.x = i;
+	w.tex = &tex;
+	w.tex_x = tex_x;
+	w.data = data;
+	draw_tex_wall(&w);
 	draw_floor(i, hit->end_y, data);
 }
