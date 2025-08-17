@@ -84,42 +84,6 @@ static int	flood_fill(t_mapinfo *info, int x, int y)
 	return (1);
 }
 
-static char	**copy_map(char **map, int height, int width)
-{
-	char	**copy;
-	int		i;
-	int		j;
-
-	copy = malloc(sizeof(char *) * (height + 1));
-	if (!copy)
-		return (NULL);
-	i = 0;
-	while (i < height)
-	{
-		copy[i] = malloc(width + 1);
-		if (!copy[i])
-			return (NULL);
-		j = 0;
-		while (j < width && map[i][j])
-		{
-			if (is_invalid_char(map[i][j]))
-			{
-				printf("Invalid char in map: '%c' (ASCII: %d) row %d, column %d\n", map[i][j], (int)map[i][j], i, j);
-				free_map(copy, i + 1);
-				return (NULL);
-			}
-			copy[i][j] = map[i][j];
-			j++;
-		}
-		while (j < width)
-			copy[i][j++] = ' ';
-		copy[i][j] = '\0';
-		i++;
-	}
-	copy[height] = NULL;
-	return (copy);
-}
-
 int	is_map_closed(char **map, int height, int width)
 {
 	t_mapinfo	info;
