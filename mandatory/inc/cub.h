@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 13:47:23 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/17 15:17:58 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/17 15:54:07 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,13 @@ typedef struct s_wall_calc
 	int				tex_y;
 	int				color;
 }					t_wall_calc;
+
+typedef struct s_mapinfo
+{
+	char	**map;
+	int		width;
+	int		height;
+}	t_mapinfo;
 
 // parsing
 int					parse_args(t_data *data, char *filename);

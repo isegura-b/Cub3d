@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 15:38:51 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/17 15:38:54 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/17 15:56:51 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,24 @@ static void	free_map(char **map, int height)
 	free(map);
 }
 
-static int	flood_fill(char **map, int x, int y, int width, int height)
+static int	flood_fill(t_mapinfo *info, int x, int y)
 {
-	if (x < 0 || y < 0 || x >= width || y >= height)
+	if (x < 0 || y < 0 || x >= info->width || y >= info->height)
 		return (0);
-	if (map[y][x] == '1' || map[y][x] == 'F')
+	if (info->map[y][x] == '1' || info->map[y][x] == 'F')
 		return (1);
-	if (map[y][x] == ' ')
+	if (info->map[y][x] == ' ')
 		return (0);
-	if (is_invalid_char(map[y][x]))
+	if (is_invalid_char(info->map[y][x]))
 		return (0);
-	map[y][x] = 'F';
-	if (!flood_fill(map, x + 1, y, width, height))
+	info->map[y][x] = 'F';
+	if (!flood_fill(info, x + 1, y))
 		return (0);
-	if (!flood_fill(map, x - 1, y, width, height))
+	if (!flood_fill(info, x - 1, y))
 		return (0);
-	if (!flood_fill(map, x, y + 1, width, height))
+	if (!flood_fill(info, x, y + 1))
 		return (0);
-	if (!flood_fill(map, x, y - 1, width, height))
+	if (!flood_fill(info, x, y - 1))
 		return (0);
 	return (1);
 }
@@ -122,17 +122,19 @@ static char	**copy_map(char **map, int height, int width)
 
 int	is_map_closed(char **map, int height, int width)
 {
-	char	**temp;
-	int		i;
-	int		x = -1, y;
-	int		j;
-	int		result;
+	t_mapinfo	info;
+	char		**temp;
 
+	int i, j, x, y, result;
 	temp = copy_map(map, height, width);
 	if (!temp)
 		return (-1);
+	info.map = temp;
+	info.width = width;
+	info.height = height;
+	x = -1;
+	y = -1;
 	i = 0;
-	x = -1, y = -1;
 	while (i < height && y == -1)
 	{
 		j = 0;
@@ -154,7 +156,7 @@ int	is_map_closed(char **map, int height, int width)
 		free_map(temp, height);
 		return (0);
 	}
-	result = flood_fill(temp, x, y, width, height);
+	result = flood_fill(&info, x, y);
 	free_map(temp, height);
 	return (result);
 }
