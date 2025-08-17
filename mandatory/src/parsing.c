@@ -92,8 +92,7 @@ static char	**copy_map(char **map, int height, int width)
 		{
 			if (is_invalid_char(map[i][j]))
 			{
-				printf("Invalid char in map: '%c' (ASCII: %d) en fila %d,
-					columna %d\n", map[i][j], (int)map[i][j], i, j);
+				printf("Invalid char in map: '%c' (ASCII: %d) row %d, column %d\n", map[i][j], (int)map[i][j], i, j);
 				free_map(copy, i + 1);
 				return (NULL);
 			}

@@ -142,6 +142,24 @@ typedef struct s_ray_vars
 	int				side;
 }					t_ray_vars;
 
+typedef struct s_wall_info
+{
+	t_hit_info	*hit;
+	int			x;
+	t_texture	*tex;
+	int			tex_x;
+	t_data		*data;
+}	t_wall_info;
+
+typedef struct s_wall_calc
+{
+	int	wall_height;
+	int	y;
+	int	d;
+	int	tex_y;
+	int	color;
+}	t_wall_calc;
+
 // parsing
 int					parse_args(t_data *data, char *filename);
 

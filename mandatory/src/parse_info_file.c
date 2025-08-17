@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 14:05:22 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/17 14:05:24 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/17 15:32:32 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,25 @@ int	is_empty_line(const char *line)
 	return (1);
 }
 
-int	is_texture(char *line)
+static int	parse_num(const char *str, size_t *i)
 {
-	int		flag;
-	size_t	i;
+	int	num;
 
-	flag = 0;
-	if (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
-		flag = 1;
-	else if (line[0] == 'S' && line[1] == 'O' && line[2] == ' ')
-		flag = 1;
-	else if (line[0] == 'E' && line[1] == 'A' && line[2] == ' ')
-		flag = 1;
-	else if (line[0] == 'W' && line[1] == 'E' && line[2] == ' ')
-		flag = 1;
-	if (flag == 1)
+	num = 0;
+	if (!(str[*i] >= '0' && str[*i] <= '9'))
+		return (-1);
+	while (str[*i] >= '0' && str[*i] <= '9')
 	{
-		i = 3;
-		while (line[i] && line[i] == ' ')
-			i++;
-		if (!line[i] || line[i] != '.' || line[i + 1] != '/')
-			return (ft_error("not path found"), -1);
-		return (1);
+		num = num * 10 + (str[*i] - '0');
+		(*i)++;
 	}
-	return (0);
+	if (num < 0 || num > 255)
+		return (-1);
+	return (num);
 }
 
 int	is_valid_rgb(const char *str)
 {
-	int		num;
 	size_t	i;
 	int		j;
 
@@ -63,29 +53,15 @@ int	is_valid_rgb(const char *str)
 	j = 0;
 	while (j < 3)
 	{
-		if (!(str[i] >= '0' && str[i] <= '9'))
-			return (0);
-		num = 0;
-		while (str[i] >= '0' && str[i] <= '9')
-		{
-			num = num * 10 + (str[i] - '0');
-			i++;
-		}
-		if (num < 0 || num > 255)
+		if (parse_num(str, &i) == -1)
 			return (0);
 		j++;
-		if (j < 3)
-		{
-			if (str[i] != ',')
-				return (0);
-			i++;
-		}
+		if (j < 3 && str[i++] != ',')
+			return (0);
 	}
 	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\r')
 		i++;
-	if (str[i] != '\0')
-		return (0);
-	return (1);
+	return (str[i] == '\0');
 }
 
 int	is_color(char *line)

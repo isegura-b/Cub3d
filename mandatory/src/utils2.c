@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/17 15:34:01 by isegura-          #+#    #+#             */
+/*   Updated: 2025/08/17 15:34:03 by isegura-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
 
 int	get_step(const t_player *p, float *dx, float *dy)
@@ -58,4 +70,30 @@ int	get_dir(const t_player *p, float *dx, float *dy)
 	*dx = v * c + h * s;
 	*dy = v * s - h * c;
 	return (1);
+}
+
+int	is_texture(char *line)
+{
+	int		flag;
+	size_t	i;
+
+	flag = 0;
+	if (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
+		flag = 1;
+	else if (line[0] == 'S' && line[1] == 'O' && line[2] == ' ')
+		flag = 1;
+	else if (line[0] == 'E' && line[1] == 'A' && line[2] == ' ')
+		flag = 1;
+	else if (line[0] == 'W' && line[1] == 'E' && line[2] == ' ')
+		flag = 1;
+	if (flag == 1)
+	{
+		i = 3;
+		while (line[i] && line[i] == ' ')
+			i++;
+		if (!line[i] || line[i] != '.' || line[i + 1] != '/')
+			return (ft_error("not path found"), -1);
+		return (1);
+	}
+	return (0);
 }
