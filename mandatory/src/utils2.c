@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 15:34:01 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/17 15:34:03 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:16:24 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	get_step(const t_player *p, float *dx, float *dy)
 		h = -1;
 	if (v == 0 && h == 0)
 		return (0);
-	*dx = (v * c + h * s) * 3;
-	*dy = (v * s + h * -c) * 3;
+	*dx = (v * c + h * s) * 20;
+	*dy = (v * s + h * -c) * 20;
 	return (1);
 }
 
