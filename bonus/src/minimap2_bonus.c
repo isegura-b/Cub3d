@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 09:09:39 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/22 09:37:04 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/22 11:12:01 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,18 @@ void	draw_cell_background(int x, int y, int size, t_data *data)
 
 void	draw_map_row(char *row, int len, int y, t_minimap *m)
 {
-	int	x;
-	int	cx;
-	int	cy;
+	int		x;
+	t_point	p;
 
 	x = 0;
 	while (x < len)
 	{
-		cx = m->x + x * m->size;
-		cy = m->y + y * m->size;
+		p.x = m->x + x * m->size;
+		p.y = m->y + y * m->size;
 		if (row[x] != ' ' && row[x] != '\t')
-			draw_cell_background(cx, cy, m->size, m->data);
+			draw_cell_background(p.x, p.y, m->size, m->data);
 		if (row[x] == '1')
-			draw_square_test(cx, cy, m->size, 0xFFFFFF, m->data);
+			draw_square_test(p, m->size, 0xFFFFFF, m->data);
 		x++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 13:47:23 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/22 09:35:08 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/22 11:11:09 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,9 +288,8 @@ void				free_map(char **map, int height);
 int					check_map(t_data *data, char *filename);
 int					error_close(int fd, char *line);
 void				draw_minimap(t_data *data);
-void				draw_square_test(int x, int y, int size, int color,
+void				draw_square_test(t_point point, int size, int color,
 						t_data *data);
-
 void				draw_minimap_background(t_rect rect, int color,
 						t_data *data);
 void				draw_cell_background(int x, int y, int size, t_data *data);

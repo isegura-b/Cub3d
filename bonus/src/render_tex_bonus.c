@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_tex.c                                       :+:      :+:    :+:   */
+/*   render_tex_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aprenafe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 14:11:27 by aprenafe          #+#    #+#             */
-/*   Updated: 2025/08/17 14:36:07 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/22 11:12:21 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,15 @@ void	draw_column(t_hit_info *hit, int i, t_data *data)
 	draw_floor(i, hit->end_y, data);
 }
 
-void	draw_square_test(int x, int y, int size, int color, t_data *data)
+void	draw_square_test(t_point point, int size, int color, t_data *data)
 {
 	int	i;
+	int	x;
+	int	y;
 
 	i = 0;
+	x = point.x;
+	y = point.y;
 	while (i < size)
 	{
 		if (x + i >= 0 && x + i < WIDTH && y >= 0 && y < HEIGHT)

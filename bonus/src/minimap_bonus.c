@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 09:18:38 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/22 09:39:08 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/22 11:11:44 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 static void	draw_minimap_player(t_minimap *m)
 {
-	int	px;
-	int	py;
+	int		px;
+	int		py;
+	t_point	point;
 
 	px = m->x + (int)(m->data->player.x / WALL * m->size);
 	py = m->y + (int)(m->data->player.y / WALL * m->size);
-	draw_square_test(px - PLAYER_SIZE / 2, py - PLAYER_SIZE / 2, PLAYER_SIZE,
+	point.x = (px - PLAYER_SIZE) / 2;
+	point.y = (py - PLAYER_SIZE) / 2;
+	draw_square_test(point, PLAYER_SIZE,
 		0x00FF00, m->data);
 }
 
