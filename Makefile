@@ -6,7 +6,7 @@
 #    By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/22 08:58:22 by isegura-          #+#    #+#              #
-#    Updated: 2025/08/22 09:46:57 by isegura-         ###   ########.fr        #
+#    Updated: 2025/08/22 11:58:15 by isegura-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ BONUS_SRC_DIR = bonus/src
 OBJ_DIR = obj
 MANDATORY_OBJ_DIR = $(OBJ_DIR)/mandatory
 BONUS_OBJ_DIR = $(OBJ_DIR)/bonus
-MLX_DIR = mandatory/inc/mlx
-BONUS_MLX_DIR = bonus/inc/mlx
+MLX_DIR = inc/mlx
+BONUS_MLX_DIR = inc/mlx
 
-CFLAGS = -fsanitize=address #-Wall -Wextra -Werror -g
+CFLAGS = -fsanitize=address -Wall -Wextra -Werror -g
 LFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz -fsanitize=address
 BONUS_LFLAGS = -L$(BONUS_MLX_DIR) -lmlx -lXext -lX11 -lm -lz -fsanitize=address
 

@@ -279,7 +279,6 @@ int					get_step(const t_player *p, float *dx, float *dy);
 int					get_dir(const t_player *p, float *dx, float *dy);
 void				normalize_angle(t_player *p);
 float				dir_angle(char c);
-static char			*alloc_copy_row(const char *src, int width, int row);
 char				**copy_map(char **map, int height, int width);
 int					is_cub_file(char *filename);
 int					parse_file(t_data *data, char *filename);

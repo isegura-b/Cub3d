@@ -30,6 +30,7 @@ int	parse_file(t_data *data, char *filename)
 	int	fd;
 	int	dir_fd;
 
+	(void)data;
 	fd = open(filename, O_RDONLY);
 	dir_fd = open(filename, O_DIRECTORY);
 	if (dir_fd != -1)
