@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gnl_cub_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/17 13:54:15 by isegura-          #+#    #+#             */
+/*   Updated: 2025/08/17 13:54:16 by isegura-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	unsigned char	*spc;
 	size_t			i;
+	unsigned char	*spc;
 
 	i = 0;
-	spc = malloc (nmemb * size);
+	spc = malloc(nmemb * size);
 	if (!spc)
 		return (NULL);
-	while (i < (nmemb * size))
+	while (i < nmemb * size)
 	{
 		spc[i] = 0;
 		i++;
@@ -19,18 +31,18 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t		i;
-	size_t		s1_len;
-	size_t		s2_len;
-	char		*mem;
+	size_t	i;
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*mem;
 
 	i = 0;
-	if (s1 == NULL || s2 == NULL)
+	if (!s1 || !s2)
 		return (NULL);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
-	mem = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
-	if (mem == NULL)
+	mem = malloc(s1_len + s2_len + 1);
+	if (!mem)
 		return (NULL);
 	while (i < s1_len)
 	{
@@ -48,28 +60,28 @@ char	*ft_strjoin(char *s1, char *s2)
 
 size_t	ft_strlen(const char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (s[i])
 		i++;
 	return (i);
 }
 
 char	*ft_strchr(const char *s, int c)
 {
-	int		i;
+	size_t	i;
 	char	cc;
 
 	i = 0;
-	cc = (char) c;
-	while (s[i] != '\0')
+	cc = (char)c;
+	while (s[i])
 	{
 		if (s[i] == cc)
-			return ((char *) &s[i]);
+			return ((char *)&s[i]);
 		i++;
 	}
 	if (s[i] == cc)
-		return ((char *) &s[i]);
+		return ((char *)&s[i]);
 	return (NULL);
 }

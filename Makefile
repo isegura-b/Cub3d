@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/08/22 08:58:22 by isegura-          #+#    #+#              #
+#    Updated: 2025/08/22 09:46:57 by isegura-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = cub3D
 BONUS_NAME = cub3D_bonus
 
@@ -16,7 +28,7 @@ BONUS_LFLAGS = -L$(BONUS_MLX_DIR) -lmlx -lXext -lX11 -lm -lz -fsanitize=address
 
 MANDATORY_SRC = \
 	$(MANDATORY_SRC_DIR)/check_map.c \
-	$(MANDATORY_SRC_DIR)/clen.c \
+	$(MANDATORY_SRC_DIR)/clean.c \
 	$(MANDATORY_SRC_DIR)/dda.c \
 	$(MANDATORY_SRC_DIR)/events.c \
 	$(MANDATORY_SRC_DIR)/gnl_cub_utils.c \
@@ -36,19 +48,27 @@ MANDATORY_SRC = \
 	$(MANDATORY_SRC_DIR)/utils2.c
 
 BONUS_SRC = \
+	$(BONUS_SRC_DIR)/check_map_bonus.c \
+	$(BONUS_SRC_DIR)/clean_bonus.c \
 	$(BONUS_SRC_DIR)/dda_bonus.c \
+	$(BONUS_SRC_DIR)/draw_no_wall_bonus.c \
 	$(BONUS_SRC_DIR)/events_bonus.c \
 	$(BONUS_SRC_DIR)/gnl_cub_bonus.c \
 	$(BONUS_SRC_DIR)/gnl_cub_utils_bonus.c \
 	$(BONUS_SRC_DIR)/init_bonus.c \
 	$(BONUS_SRC_DIR)/main_bonus.c \
 	$(BONUS_SRC_DIR)/minimap_bonus.c \
+	$(BONUS_SRC_DIR)/minimap2_bonus.c \
 	$(BONUS_SRC_DIR)/parse_info_file_bonus.c \
 	$(BONUS_SRC_DIR)/parsing_bonus.c \
+	$(BONUS_SRC_DIR)/parsing_utils2_bonus.c \
+	$(BONUS_SRC_DIR)/parsing_utils_bonus.c \
 	$(BONUS_SRC_DIR)/render_bonus.c \
 	$(BONUS_SRC_DIR)/render_tex_bonus.c \
 	$(BONUS_SRC_DIR)/save_info_file_bonus.c \
-	$(BONUS_SRC_DIR)/utils_bonus.c
+	$(BONUS_SRC_DIR)/save_into_file_utils_bonus.c \
+	$(BONUS_SRC_DIR)/utils_bonus.c \
+	$(BONUS_SRC_DIR)/utils2_bonus.c
 
 MANDATORY_OBJ = $(patsubst $(MANDATORY_SRC_DIR)/%.c, $(MANDATORY_OBJ_DIR)/%.o, $(MANDATORY_SRC))
 BONUS_OBJ = $(patsubst $(BONUS_SRC_DIR)/%.c, $(BONUS_OBJ_DIR)/%.o, $(BONUS_SRC))

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gnl_cub.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/17 13:53:06 by isegura-          #+#    #+#             */
+/*   Updated: 2025/08/17 13:53:09 by isegura-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
 
 static char	*ft_free(char *buffer, char *tmp)
@@ -44,7 +56,7 @@ static char	*ft_line(char *buffer)
 
 static char	*ft_read(int fd, char *buffer)
 {
-	char		*tmp;
+	char	*tmp;
 	ssize_t	r;
 
 	if (!buffer)
@@ -73,7 +85,7 @@ static char	*ft_read(int fd, char *buffer)
 
 static char	*res_buffer(char *buffer)
 {
-	char		*res;
+	char	*res;
 	size_t	i;
 	size_t	j;
 
