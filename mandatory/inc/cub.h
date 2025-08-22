@@ -14,7 +14,7 @@
 # define CUB_H
 
 # include "./get_next_line.h"
-# include "./mlx/mlx.h"
+# include "../../inc/mlx/mlx.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
