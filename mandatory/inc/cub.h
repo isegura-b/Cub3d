@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 13:47:23 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/17 16:32:12 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/26 21:08:23 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,5 +262,6 @@ int					is_invalid_char(char c);
 void				free_map(char **map, int height);
 int					check_map(t_data *data, char *filename);
 int					error_close(int fd, char *line);
+int					ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

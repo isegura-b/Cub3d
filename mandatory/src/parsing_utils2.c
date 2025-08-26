@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 16:01:05 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/17 16:02:09 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/08/26 21:09:23 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,12 @@ void	free_map(char **map, int height)
 		i++;
 	}
 	free(map);
+}
+
+int	error_close(int fd, char *line)
+{
+	if (line)
+		free(line);
+	close(fd);
+	return (1);
 }

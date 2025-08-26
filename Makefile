@@ -22,8 +22,8 @@ BONUS_OBJ_DIR = $(OBJ_DIR)/bonus
 MLX_DIR = inc/mlx
 BONUS_MLX_DIR = inc/mlx
 
-CFLAGS = -fsanitize=address -Wall -Wextra -Werror -g
-LFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g
+LFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz #-fsanitize=address
 BONUS_LFLAGS = -L$(BONUS_MLX_DIR) -lmlx -lXext -lX11 -lm -lz -fsanitize=address
 
 MANDATORY_SRC = \
