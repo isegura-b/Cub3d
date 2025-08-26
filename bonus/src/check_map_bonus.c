@@ -23,9 +23,14 @@ static int	premap_ready(t_info_file *i)
 
 static int	handle_header_line(char *line, t_info_file *info, int *started)
 {
-	if (is_texture(line))
+	int	text;
+	int	color;
+
+	text = is_texture(line);
+	color = is_color(line);
+	if (text)
 		info_texture(line, info);
-	else if (is_color(line))
+	else if (color)
 		info_colors(line, info);
 	else if (is_map_line(line))
 	{
@@ -35,8 +40,7 @@ static int	handle_header_line(char *line, t_info_file *info, int *started)
 			return (ft_error("Start of map not found"), 1);
 		*started = 1;
 	}
-	else if (is_map_line(line) != -1 || is_texture(line) != -1
-		|| is_color(line) != -1)
+	else if (is_map_line(line) != -1 || text != -1 || color != -1)
 		return (ft_error("Invalid line format in .cub file"), 1);
 	return (0);
 }

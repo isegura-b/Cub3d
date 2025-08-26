@@ -64,45 +64,39 @@ int	is_valid_rgb(const char *str)
 	return (str[i] == '\0');
 }
 
+int	color_tests(char *line, int i, int f, int c)
+{
+	if (f > 1 || c > 1)
+		return (ft_error("Duplicate floor color"), 1);
+	if (line[i] == '\0')
+		return (ft_error("Not color found"), 1);
+	if (!is_valid_rgb(line + i))
+		return (ft_error("Colors must be in R,G,B format (0-255)"), 1);
+	return (0);
+}
+
 int	is_color(char *line)
 {
-	size_t	i;
+	size_t		i;
+	static int	f;
+	static int	c;
 
 	i = 1;
 	while (line[i] == ' ')
 		i++;
 	if (line[0] == 'F')
 	{
-		if (line[i] == '\0')
-			return (ft_error("Floor has no color"), -1);
-		if (!is_valid_rgb(line + i))
-			return (ft_error("Floor color must be RGB format (0-255)"), -1);
+		f++;
+		if (color_tests(line, i, f, c))
+			return (-1);
 		return (1);
 	}
 	else if (line[0] == 'C')
 	{
-		if (line[i] == '\0')
-			return (ft_error("Sky has no color"), -1);
-		if (!is_valid_rgb(line + i))
-			return (ft_error("Sky color must be in R,G,B format (0-255)"), -1);
+		c++;
+		if (color_tests(line, i, f, c))
+			return (-1);
 		return (1);
 	}
 	return (0);
-}
-
-int	is_map_line(char *line)
-{
-	size_t	i;
-
-	i = 0;
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-	while (line[i])
-	{
-		if (line[i] != '1' && line[i] != ' ' && line[i] != '\n'
-			&& line[i] != '\r')
-			return (2);
-		i++;
-	}
-	return (1);
 }
