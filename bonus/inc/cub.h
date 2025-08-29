@@ -295,5 +295,6 @@ void				draw_cell_background(int x, int y, int size, t_data *data);
 void				draw_map_row(char *row, int len, int y, t_minimap *m);
 void				draw_minimap_cells(t_minimap *m, int height);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
+int					normalize_map(t_info_file *info);
 
 #endif

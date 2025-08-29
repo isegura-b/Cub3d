@@ -263,5 +263,6 @@ void				free_map(char **map, int height);
 int					check_map(t_data *data, char *filename);
 int					error_close(int fd, char *line);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
+int					normalize_map(t_info_file *info);
 
 #endif

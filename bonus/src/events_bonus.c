@@ -68,6 +68,10 @@ int	wall_stop(t_player *player)
 		return (0);
 	map_x = (int)((player->x + dx) / WALL);
 	map_y = (int)((player->y + dy) / WALL);
+	if (map_x < 0 || map_y < 0
+		|| map_y >= player->data->info_file.map_hight
+		|| map_x >= player->data->info_file.map_width)
+		return (1);
 	if (player->data->map[map_y][map_x] == '1')
 		return (1);
 	return (0);

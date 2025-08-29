@@ -91,6 +91,8 @@ int	check_map(t_data *data, char *filename)
 		return (ft_error("Could not open .cub file"), 1);
 	if (process_lines(fd, &info_file, &is_map_started))
 		return (1);
+	if (normalize_map(&info_file))
+		return (ft_error("Failed to normalize map"), 1);
 	data->info_file = info_file;
 	data->map = data->info_file.map;
 	return (0);

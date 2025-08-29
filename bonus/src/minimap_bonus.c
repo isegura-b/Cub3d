@@ -20,8 +20,8 @@ static void	draw_minimap_player(t_minimap *m)
 
 	px = m->x + (int)(m->data->player.x / WALL * m->size);
 	py = m->y + (int)(m->data->player.y / WALL * m->size);
-	point.x = (px - PLAYER_SIZE) / 2;
-	point.y = (py - PLAYER_SIZE) / 2;
+	point.x = px - (PLAYER_SIZE / 2);
+	point.y = py - (PLAYER_SIZE / 2);
 	draw_square_test(point, PLAYER_SIZE,
 		0x00FF00, m->data);
 }
