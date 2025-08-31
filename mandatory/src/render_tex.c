@@ -25,25 +25,26 @@ float	get_wall_hit_x(t_hit_info *hit)
 
 int	get_tex_x(float wall_x, int side, t_texture *tex, float ray_dir_x, float ray_dir_y)
 {
-	int tex_x = (int)(wall_x * tex->width);
+	int tex_x;
 
-	if (tex_x < 0) tex_x = 0;
-	if (tex_x >= tex->width) tex_x = tex->width - 1;
-
-	if (side == EAST || side == WEST) {
+	tex_x = (int)(wall_x * tex->width);
+	if (tex_x < 0)
+		tex_x = 0;
+	if (tex_x >= tex->width) 
+		tex_x = tex->width - 1;
+	if (side == EAST || side == WEST) 
+	{
 		if (ray_dir_x > 0)               
 			tex_x = tex->width - tex_x - 1;
 	}
-	else if (side == NORTH || side == SOUTH) {
+	else if (side == NORTH || side == SOUTH) 
+	{
 		if (ray_dir_y < 0)                 
 			tex_x = tex->width - tex_x - 1;
 	}
 	if (side == SOUTH || side == EAST)
-	{
 		tex_x = tex->width - tex_x - 1;
-		printf("ES SUD o ESTE\n");
-	}
-	return tex_x;
+	return (tex_x);
 }
 
 void	draw_tex_wall(t_wall_info *w)
