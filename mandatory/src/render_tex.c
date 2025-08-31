@@ -30,16 +30,16 @@ int	get_tex_x(float wall_x, int side, t_texture *tex, t_hit_info *hit)
 	tex_x = (int)(wall_x * tex->width);
 	if (tex_x < 0)
 		tex_x = 0;
-	if (tex_x >= tex->width) 
+	if (tex_x >= tex->width)
 		tex_x = tex->width - 1;
-	if (side == EAST || side == WEST) 
+	if (side == EAST || side == WEST)
 	{
-		if (hit->ray_x > 0)               
+		if (hit->ray_x > 0)
 			tex_x = tex->width - tex_x - 1;
 	}
-	else if (side == NORTH || side == SOUTH) 
+	else if (side == NORTH || side == SOUTH)
 	{
-		if (hit->ray_y < 0)                 
+		if (hit->ray_y < 0)
 			tex_x = tex->width - tex_x - 1;
 	}
 	if (side == SOUTH || side == EAST)
