@@ -77,7 +77,6 @@ void	draw_column(t_hit_info *hit, int i, t_data *data)
 	wall_x = get_wall_hit_x(hit);
 	tex = data->textures[hit->hit_side];
 	tex_x = get_tex_x(wall_x, hit->hit_side, &tex, hit);
-
 	draw_sky(i, hit->start_y, data);
 	w.hit = hit;
 	w.x = i;
