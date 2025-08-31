@@ -45,7 +45,8 @@ MANDATORY_SRC = \
 	$(MANDATORY_SRC_DIR)/save_info_file.c \
 	$(MANDATORY_SRC_DIR)/save_into_file_utils.c \
 	$(MANDATORY_SRC_DIR)/utils.c \
-	$(MANDATORY_SRC_DIR)/utils2.c
+	$(MANDATORY_SRC_DIR)/utils2.c \
+	$(MANDATORY_SRC_DIR)/utils3.c
 
 BONUS_SRC = \
 	$(BONUS_SRC_DIR)/check_map_bonus.c \
