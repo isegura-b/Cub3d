@@ -30,16 +30,16 @@ int	get_tex_x(float wall_x, int side, t_texture *tex, float ray_dir_x, float ray
 	if (tex_x < 0) tex_x = 0;
 	if (tex_x >= tex->width) tex_x = tex->width - 1;
 
-	// Pared vertical (EAST/WEST) -> decidir por ray_dir_x
 	if (side == EAST || side == WEST) {
-		if (ray_dir_x > 0)                 // invierte si el rayo venía desde el oeste hacia el este
+		if (ray_dir_x > 0)               
 			tex_x = tex->width - tex_x - 1;
 	}
-	// Pared horizontal (NORTH/SOUTH) -> decidir por ray_dir_y
 	else if (side == NORTH || side == SOUTH) {
-		if (ray_dir_y < 0)                 // invierte si el rayo venía desde el sur hacia el norte
+		if (ray_dir_y < 0)                 
 			tex_x = tex->width - tex_x - 1;
 	}
+	if (side == SOUTH || side == EAST)
+		wall_x = tex->width - wall_x - 1;
 	return tex_x;
 }
 
