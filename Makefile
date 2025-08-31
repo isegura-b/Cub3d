@@ -69,7 +69,8 @@ BONUS_SRC = \
 	$(BONUS_SRC_DIR)/save_info_file_bonus.c \
 	$(BONUS_SRC_DIR)/save_into_file_utils_bonus.c \
 	$(BONUS_SRC_DIR)/utils_bonus.c \
-	$(BONUS_SRC_DIR)/utils2_bonus.c
+	$(BONUS_SRC_DIR)/utils2_bonus.c \
+	$(BONUS_SRC_DIR)/utils3_bonus.c
 
 MANDATORY_OBJ = $(patsubst $(MANDATORY_SRC_DIR)/%.c, $(MANDATORY_OBJ_DIR)/%.o, $(MANDATORY_SRC))
 BONUS_OBJ = $(patsubst $(BONUS_SRC_DIR)/%.c, $(BONUS_OBJ_DIR)/%.o, $(BONUS_SRC))

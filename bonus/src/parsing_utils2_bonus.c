@@ -44,25 +44,6 @@ int	parse_file(t_data *data, char *filename)
 	return (0);
 }
 
-int	is_invalid_char(char c)
-{
-	return (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'E' && c != 'W'
-		&& c != ' ' && c != '\t' && c != '\r' && c != '\n');
-}
-
-void	free_map(char **map, int height)
-{
-	int	i;
-
-	i = 0;
-	while (i < height)
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
-
 static void	fill_borders_with_walls(char **map, int height, int width)
 {
 	int		i;
