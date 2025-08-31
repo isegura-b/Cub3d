@@ -217,7 +217,7 @@ void				cast_ray(t_player *player, t_data *data, float angle,
 // render_tex
 void				draw_column(t_hit_info *hit, int i, t_data *data);
 float				get_wall_hit_x(t_hit_info *hit);
-int					get_tex_x(float wall_x, int side, t_texture *tex, float ray_dir_x, float ray_dir_y);
+int					get_tex_x(float wall_x, int side, t_texture *tex, t_hit_info *hit);
 void				draw_sky(int x, int end_y, t_data *data);
 void				draw_floor(int x, int start_y, t_data *data);
 void				draw_tex_wall(t_wall_info *w);
