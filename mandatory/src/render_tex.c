@@ -40,7 +40,7 @@ int	get_tex_x(float wall_x, int side, t_texture *tex, float ray_dir_x, float ray
 	}
 	if (side == SOUTH || side == EAST)
 	{
-		wall_x = tex->width - wall_x - 1;
+		tex_x = tex->width - tex_x - 1;
 		printf("ES SUD o ESTE\n");
 	}
 	return tex_x;
