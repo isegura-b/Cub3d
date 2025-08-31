@@ -23,7 +23,7 @@ float	get_wall_hit_x(t_hit_info *hit)
 	return (result);
 }
 
-int	get_tex_x(float wall_x, int side, t_texture *tex)
+int	get_tex_x(float wall_x, int side, t_texture *tex, t_hit_info *hit)
 {
 	int	tex_x;
 
@@ -32,7 +32,17 @@ int	get_tex_x(float wall_x, int side, t_texture *tex)
 		tex_x = 0;
 	if (tex_x >= tex->width)
 		tex_x = tex->width - 1;
-	if (side == EAST || side == SOUTH)
+	if (side == EAST || side == WEST)
+	{
+		if (hit->ray_x > 0)
+			tex_x = tex->width - tex_x - 1;
+	}
+	else if (side == NORTH || side == SOUTH)
+	{
+		if (hit->ray_y < 0)
+			tex_x = tex->width - tex_x - 1;
+	}
+	if (side == SOUTH || side == EAST)
 		tex_x = tex->width - tex_x - 1;
 	return (tex_x);
 }
@@ -66,7 +76,7 @@ void	draw_column(t_hit_info *hit, int i, t_data *data)
 
 	wall_x = get_wall_hit_x(hit);
 	tex = data->textures[hit->hit_side];
-	tex_x = get_tex_x(wall_x, hit->hit_side, &tex);
+	tex_x = get_tex_x(wall_x, hit->hit_side, &tex, hit);
 	draw_sky(i, hit->start_y, data);
 	w.hit = hit;
 	w.x = i;
