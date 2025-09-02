@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 13:47:23 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/26 21:08:23 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:34:06 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,5 +268,6 @@ int					normalize_map(t_info_file *info);
 void				free_map(char **map, int height);
 int					is_invalid_char(char c);
 int					parse_file(t_data *data, char *filename);
+int					is_map_closed(char **map, int h, int w);
 
 #endif

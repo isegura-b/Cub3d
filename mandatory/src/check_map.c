@@ -6,7 +6,7 @@
 /*   By: isegura- <isegura-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 16:34:56 by isegura-          #+#    #+#             */
-/*   Updated: 2025/08/26 20:39:51 by isegura-         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:35:45 by isegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,14 @@ int	check_map(t_data *data, char *filename)
 		return (ft_error("Could not open .cub file"), 1);
 	if (process_lines(fd, &info_file, &is_map_started))
 		return (1);
+	data->info_file = info_file;
+	data->map = data->info_file.map;
+	if (!is_map_closed(data->info_file.map, data->info_file.map_hight,
+			data->info_file.map_width))
+		return (ft_error("Map is not closed"), 1);
+	if (is_map_closed(data->info_file.map, data->info_file.map_hight,
+			data->info_file.map_width) == -1)
+		return (ft_error(NULL), 1);
 	if (normalize_map(&info_file))
 		return (ft_error("Failed to normalize map"), 1);
 	data->info_file = info_file;
