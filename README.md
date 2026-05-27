@@ -106,4 +106,4 @@ make re      # recompila todo
 
 - `isegura-` / `isegura-b`
 
-> Proyecto realizado como parte del currículo de la escuela 42.
+> Proyecto realizado como parte de la escuela 42.
